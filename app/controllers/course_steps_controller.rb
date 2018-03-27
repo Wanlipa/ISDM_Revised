@@ -27,13 +27,13 @@ class CourseStepsController < ApplicationController
 
   def create
     @user = current_user
-    @course = @user.courses.create
+    @course = @user.courses.create(:category_id => 1)
     redirect_to wizard_path(steps.first, :course_id => @course.id)
   end
 
   private
     def course_params
       params.require(:course).permit(:courseName, :about_course, :topics, :instructors, :length,
-                                     :effort, :price, :institution, :subject, :level, :languages, :videots, :prerequisites, :avatar, :status)
+                                     :effort, :price, :institution, :subject, :level, :languages, :videots, :prerequisites, :avatar, :status, :category_id)
     end
 end
