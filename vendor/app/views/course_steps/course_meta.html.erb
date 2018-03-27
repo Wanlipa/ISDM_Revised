@@ -1,0 +1,65 @@
+<%= link_to 'Back', course_index_path(@course), class: "btn btn-outline-primary", style: "margin-top: 10px;margin-left: 10px;" %>
+<div class="container">
+
+  <ul class="pagination">
+    <li class="page-item"><%= link_to 'Step 1', wizard_path(:about_course, :course_id => @course.id), :method => :get  ,class: "page-link" %></li>
+    <li class="page-item"><%= link_to 'Step 2', wizard_path(:topics, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
+    <li class="page-item"><%= link_to 'Step 3', wizard_path(:instructors, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
+    <li class="page-item" id="active"><%= link_to 'Step 4', wizard_path(:course_meta, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
+  </ul>
+  <%= form_for @course, url: wizard_path do |f| %>
+    <h1>Course Metadata</h1>
+    <div class="field">
+      <%= f.label :length %><br>
+      <%= f.text_area :length %>
+    </div>
+
+    <div class="field">
+      <%= f.label :effort %><br>
+      <%= f.text_area :effort %>
+    </div>
+
+    <div class="field">
+      <%= f.label :price %><br>
+      <%= f.text_area :price %>
+    </div>
+
+    <div class="field">
+      <%= f.label :institution %><br>
+      <%= f.text_area :institution %>
+    </div>
+
+    <div class="field">
+      <%= f.label :subject %><br>
+      <%= f.text_area :subject %>
+    </div>
+
+    <div class="field">
+      <%= f.label :level %><br>
+      <%= f.text_area :level %>
+    </div>
+
+    <div class="field">
+      <%= f.label :languages %><br>
+      <%= f.text_area :languages %>
+    </div>
+
+    <div class="field">
+      <%= f.label :video_transcript %><br>
+      <%= f.text_area :videots %>
+    </div>
+
+    <div class="field">
+      <%= f.label :prerequisites %><br>
+      <%= f.text_area :prerequisites %>
+    </div>
+
+    <div class="field">
+      <%= f.hidden_field :course_id, value: @course.id %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Submit" ,class:"btn btn-success"%>
+    </div>
+<% end %>
+</div>

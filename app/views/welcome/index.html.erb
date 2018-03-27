@@ -1,0 +1,16 @@
+
+<div class="container">
+  <div class="jumbotron" style="margin-top: 32px">
+    <h1>Welcome to ...</h1>
+    <h2>Online Course Design Support System</h2>
+
+  </div>
+  <!-- <%= link_to 'My Blog', controller: 'articles' %> -->
+  <% if current_user!=nil %>
+
+    <%= link_to 'Create course', user_course_steps_path(current_user.id), method: :post ,class: "btn btn-primary btn-lg btn-block" %>
+    <% if @courses.empty? == false %>
+      <%= link_to 'View all courses', course_index_path,class: "btn btn-primary btn-lg btn-block" %>
+    <% end %>
+  <% end %>
+</div>
