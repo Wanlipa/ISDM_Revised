@@ -1,4 +1,4 @@
-<%= link_to 'Back', course_index_path(@course), class: "btn btn-outline-primary", style: "margin-top: 10px;margin-left: 10px;" %>
+<%= link_to 'Back', course_check_path(:id => @course.id), :data => {:confirm => 'Please make sure to insert course name, otherwise, course will not be saved.'}, class: "btn btn-outline-primary", style: "margin-top: 10px;margin-left: 10px;" %>
 <div class="container">
   <ul class="pagination">
     <li class="page-item"><%= link_to 'Step 1', wizard_path(:about_course, :course_id => @course.id), :method => :get  ,class: "page-link" %></li>

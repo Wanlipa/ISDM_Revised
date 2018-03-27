@@ -7,6 +7,15 @@ class CourseController < ApplicationController
     end
   end
 
+  # delete created course that has no course name specified.
+  def check
+    @course = Course.find(params[:id])
+    if @course.courseName.nil? || @course.courseName.empty?
+      @course.destroy
+    end
+    redirect_to course_index_path
+  end
+
   def show
     @course = Course.find(params[:id])
     @check = @course.avatar.file.nil?

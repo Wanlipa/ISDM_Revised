@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'course/index'
   get 'course/course_syllabus'
+  get 'course/check'
   devise_for :users
   get 'welcome/index'
   root 'welcome#index'
