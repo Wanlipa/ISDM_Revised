@@ -12,21 +12,24 @@
   </ul>
 </div>
 <div class="container">
-
+  <div class="card">
   <%= form_for @course, url: wizard_path do |f| %>
-    <h1>Topic(s)</h1>
-    <div class="form-group">
-      <%= f.label :topics %><br>
-      <%= f.text_area :topics, size: "60x30", class: "form-control", placeholder: "Enter topics" %>
-    </div>
+    <h1 class="card-header">Topic(s)</h1>
+      <div class="card-body">
+        <div class="form-group">
+          <%= f.label :topics %><br>
+          <%= f.text_area :topics, size: "60x30", class: "form-control", placeholder: "Enter topics" %>
+        </div>
 
-    <div class="form-group">
-      <%= f.hidden_field :course_id, value: @course.id %>
-    </div>
+        <div class="form-group">
+          <%= f.hidden_field :course_id, value: @course.id %>
+        </div>
 
-    <div class="form-group">
-      <%= f.submit "Save and continue",class:"btn btn-success" %>
-      <%= button_to 'Skip', wizard_path(:instructors),class:"btn btn-warning" %>
+        <div class="form-group">
+          <%= f.submit "Save and continue",class:"btn btn-success" %>
+          <%= button_to 'Skip', wizard_path(:instructors),class:"btn btn-warning" %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>

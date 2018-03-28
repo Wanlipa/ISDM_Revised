@@ -11,5 +11,20 @@ Category.create([{name: 'Architecture'},
                  { name: 'Art & Culture'},
                  { name: 'Biology & Life Sciences'},
                  { name: 'Business & Management'},
-                 { name: 'Chemistry'}
+                 { name: 'Chemistry'},
+                 { name: 'Computer Science'}
                 ])
+
+# Initial Data for Role
+@admin = Role.create(name: "Admin")
+@member = Role.create(name: "Member")
+# Admin
+User.create(email: "admin@ait.asia",
+            password: "admin123",
+            password_confirmation: "admin123",
+            role: @admin)
+# Member
+User.create(email: "member@ait.asia",
+            password: "member123",
+            password_confirmation: "member123",
+            role: @member)

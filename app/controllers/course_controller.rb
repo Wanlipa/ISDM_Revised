@@ -1,9 +1,16 @@
 class CourseController < ApplicationController
+  before_action :authenticate_user!, :except => [:index, :show]
+  load_and_authorize_resource
+
   def index
     @user = current_user
     @courses = @user.courses.all
     if @courses.empty?
       redirect_to welcome_index_path
+    end
+
+    if current_user.admin?
+      @courses = Course.all
     end
   end
 
@@ -19,12 +26,16 @@ class CourseController < ApplicationController
   def show
     @course = Course.find(params[:id])
     @check = @course.avatar.file.nil?
+
+    if current_user.admin?
+      @courses = Course.all
+    end
   end
 
   def destroy
     @user = current_user
-    @course = @user.courses.find(params[:id])
-    @course.destroy
+    # @course = @user.courses.find(params[:id])
+    # @course.destroy
 
     @courses = @user.courses.all
     if @courses.empty?
@@ -32,9 +43,21 @@ class CourseController < ApplicationController
     else
       redirect_to course_index_path(@course)
     end
+
+    if current_user.admin?
+      @course = Course.find(params[:id])
+      @course.destroy
+      flash[:success] = "Course successfully destroy"
+    else
+      @course = @user.courses.find(params[:id])
+      @course.destroy
+      flash[:success] = "Course successfully destroy"
+    end
   end
 
   def course_syllabus
+    # @user = current_user
+    # @course = @user.courses.find(params[:id])
     @course = Course.find(params[:course_id])
     render pdf: "Course_Syllabus",
            :template => "course/course_syllabus.html.erb",

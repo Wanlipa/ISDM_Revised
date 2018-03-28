@@ -5,8 +5,14 @@ class CourseStepsController < ApplicationController
 
   def show
     @user = current_user
-    @course = @user.courses.find(params[:course_id])
-    render_wizard
+    begin
+      @course = @user.courses.find(params[:course_id])
+      render_wizard
+    rescue => ex
+      flash[:error] = "Admin can edit courses at Admin Dashboard"
+      redirect_to welcome_index_path
+    end
+
   end
 
   def update

@@ -12,28 +12,31 @@
   </ul>
 </div>
 <div class="container">
+  <div class="card">
   <%= form_for @course, url: wizard_path do |f| %>
-    <h1>Instructor(s)</h1>
-    <div class="form-group">
-      <%= f.label :instructors %><br>
-      <%= f.text_area :instructors, size: "60x30", class: "form-control", placeholder: "Enter instructor's information" %>
+    <h1 class="card-header">Instructor(s)</h1>
+      <div class="card-body">
+        <div class="form-group">
+          <%= f.label :instructors %><br>
+          <%= f.text_area :instructors, size: "60x30", class: "form-control", placeholder: "Enter instructor's information" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :instructor_picture %>
+          <%= f.file_field :avatar, class: "form-control-file" %>
+
+          <%= image_tag(@course.avatar_url, size: "250x150") if @course.avatar? %>
+        </div>
+
+        <div class="form-group">
+          <%= f.hidden_field :course_id, value: @course.id %>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit "Save and continue" ,class:"btn btn-success"%>
+          <%= button_to 'Skip', wizard_path(:course_meta),class:"btn btn-warning" %>
+        </div>
+      <% end %>
     </div>
-
-    <div class="form-group">
-      <%= f.label :instructor_picture %>
-      <%= f.file_field :avatar, class: "form-control-file" %>
-
-      <%= image_tag(@course.avatar_url, size: "250x150") if @course.avatar? %>
-    </div>
-
-    <div class="form-group">
-      <%= f.hidden_field :course_id, value: @course.id %>
-    </div>
-
-    <div class="form-group">
-      <%= f.submit "Save and continue" ,class:"btn btn-success"%>
-      <%= button_to 'Skip', wizard_path(:course_meta),class:"btn btn-warning" %>
-    </div>
-  <% end %>
-
+  </div>
 </div>

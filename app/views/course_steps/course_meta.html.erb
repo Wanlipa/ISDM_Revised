@@ -12,59 +12,63 @@
   </ul>
 </div>
 <div class="container">
+  <div class="card">
   <%= form_for @course, url: wizard_path do |f| %>
-    <h1>Course Metadata</h1>
-    <div class="form-group">
-      <%= f.label :length %><br>
-      <%= f.text_area :length, class: "form-control", placeholder: "Enter length" %>
-    </div>
+    <h1 class="card-header">Course Metadata</h1>
+      <div class="card-body">
+        <div class="form-group">
+          <%= f.label :length %><br>
+          <%= f.text_area :length, class: "form-control", placeholder: "Enter length" %>
+        </div>
 
-    <div class="form-group">
-      <%= f.label :effort %><br>
-      <%= f.text_area :effort, class: "form-control", placeholder: "Enter effort" %>
-    </div>
+        <div class="form-group">
+          <%= f.label :effort %><br>
+          <%= f.text_area :effort, class: "form-control", placeholder: "Enter effort" %>
+        </div>
 
-    <div class="form-group">
-      <%= f.label :price %><br>
-      <%= f.text_area :price, class: "form-control", placeholder: "Enter price" %>
-    </div>
+        <div class="form-group">
+          <%= f.label :price %><br>
+          <%= f.text_area :price, class: "form-control", placeholder: "Enter price" %>
+        </div>
 
-    <div class="form-group">
-      <%= f.label :institution %><br>
-      <%= f.text_area :institution, class: "form-control", placeholder: "Enter institution" %>
-    </div>
+        <div class="form-group">
+          <%= f.label :institution %><br>
+          <%= f.text_area :institution, class: "form-control", placeholder: "Enter institution" %>
+        </div>
 
-    <div class="form-group">
-      <%= f.label :subject %><br>
-      <%= f.text_area :subject, class: "form-control", placeholder: "Enter subject" %>
-    </div>
+        <div class="form-group">
+          <%= f.label :subject %><br>
+          <%= f.text_area :subject, class: "form-control", placeholder: "Enter subject" %>
+        </div>
 
-    <div class="form-group">
-      <%= f.label :level %><br>
-      <%= f.text_area :level, class: "form-control", placeholder: "Enter level" %>
-    </div>
+        <div class="form-group">
+          <%= f.label :level %><br>
+          <%= f.text_area :level, class: "form-control", placeholder: "Enter level" %>
+        </div>
 
-    <div class="form-group">
-      <%= f.label :languages %><br>
-      <%= f.text_area :languages, class: "form-control", placeholder: "Enter languages" %>
-    </div>
+        <div class="form-group">
+          <%= f.label :languages %><br>
+          <%= f.text_area :languages, class: "form-control", placeholder: "Enter languages" %>
+        </div>
 
-    <div class="form-group">
-      <%= f.label :video_transcript %><br>
-      <%= f.text_area :videots, class: "form-control", placeholder: "Enter video transcript" %>
-    </div>
+        <div class="form-group">
+          <%= f.label :video_transcript %><br>
+          <%= f.text_area :videots, class: "form-control", placeholder: "Enter video transcript" %>
+        </div>
 
-    <div class="form-group">
-      <%= f.label :prerequisites %><br>
-      <%= f.text_area :prerequisites, class: "form-control", placeholder: "Enter prerequisites" %>
-    </div>
+        <div class="form-group">
+          <%= f.label :prerequisites %><br>
+          <%= f.text_area :prerequisites, class: "form-control", placeholder: "Enter prerequisites" %>
+        </div>
 
-    <div class="form-group">
-      <%= f.hidden_field :course_id, value: @course.id %>
-    </div>
+        <div class="form-group">
+          <%= f.hidden_field :course_id, value: @course.id %>
+        </div>
 
-    <div class="form-group">
-      <%= f.submit "Submit" ,class:"btn btn-success"%>
+        <div class="form-group">
+          <%= f.submit "Submit" ,class:"btn btn-success"%>
+        </div>
+      </div>
     </div>
 <% end %>
 </div>
