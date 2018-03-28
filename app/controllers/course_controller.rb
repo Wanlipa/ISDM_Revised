@@ -13,7 +13,7 @@ class CourseController < ApplicationController
     if @course.courseName.nil? || @course.courseName.empty?
       @course.destroy
     end
-    redirect_to course_index_path
+    redirect_to welcome_index_path
   end
 
   def show

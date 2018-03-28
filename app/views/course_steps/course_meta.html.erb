@@ -1,64 +1,69 @@
-<%= link_to 'Back', course_check_path(:id => @course.id), :data => {:confirm => 'Please make sure to insert course name, otherwise, course will not be saved.'}, class: "btn btn-outline-primary", style: "margin-top: 10px;margin-left: 10px;" %>
-<div class="container">
-
+<div class="container", style="margin-top: 30px">
   <ul class="pagination">
+    <li class="page-item"><%= link_to 'Back', course_check_path(:id => @course.id),
+                                      :data => {:confirm => 'Please make sure to insert course name, otherwise, course will not be saved.'},
+                                      class: "page-link" %>
+    </li>
     <li class="page-item"><%= link_to 'Step 1', wizard_path(:about_course, :course_id => @course.id), :method => :get  ,class: "page-link" %></li>
     <li class="page-item"><%= link_to 'Step 2', wizard_path(:topics, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
     <li class="page-item"><%= link_to 'Step 3', wizard_path(:instructors, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
-    <li class="page-item" id="active"><%= link_to 'Step 4', wizard_path(:course_meta, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
+    <li class="page-item active"><%= link_to 'Step 4', wizard_path(:course_meta, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
+    <li class="page-item disabled"><%= link_to 'Next Step', next_wizard_path(:course_id => @course.id), class: "page-link" %></li>
   </ul>
+</div>
+<div class="container">
   <%= form_for @course, url: wizard_path do |f| %>
     <h1>Course Metadata</h1>
-    <div class="field">
+    <div class="form-group">
       <%= f.label :length %><br>
-      <%= f.text_area :length %>
+      <%= f.text_area :length, class: "form-control", placeholder: "Enter length" %>
     </div>
 
-    <div class="field">
+    <div class="form-group">
       <%= f.label :effort %><br>
-      <%= f.text_area :effort %>
+      <%= f.text_area :effort, class: "form-control", placeholder: "Enter effort" %>
     </div>
 
-    <div class="field">
+    <div class="form-group">
       <%= f.label :price %><br>
-      <%= f.text_area :price %>
+      <%= f.text_area :price, class: "form-control", placeholder: "Enter price" %>
     </div>
 
-    <div class="field">
+    <div class="form-group">
       <%= f.label :institution %><br>
-      <%= f.text_area :institution %>
+      <%= f.text_area :institution, class: "form-control", placeholder: "Enter institution" %>
     </div>
 
-    <div class="field">
+    <div class="form-group">
       <%= f.label :subject %><br>
-      <%= f.text_area :subject %>
+      <%= f.text_area :subject, class: "form-control", placeholder: "Enter subject" %>
     </div>
 
-    <div class="field">
+    <div class="form-group">
       <%= f.label :level %><br>
-      <%= f.text_area :level %>
+      <%= f.text_area :level, class: "form-control", placeholder: "Enter level" %>
     </div>
 
-    <div class="field">
+    <div class="form-group">
       <%= f.label :languages %><br>
-      <%= f.text_area :languages %>
+      <%= f.text_area :languages, class: "form-control", placeholder: "Enter languages" %>
     </div>
 
-    <div class="field">
+    <div class="form-group">
       <%= f.label :video_transcript %><br>
-      <%= f.text_area :videots %>
+      <%= f.text_area :videots, class: "form-control", placeholder: "Enter video transcript" %>
     </div>
 
-    <div class="field">
+    <div class="form-group">
       <%= f.label :prerequisites %><br>
-      <%= f.text_area :prerequisites %>
+      <%= f.text_area :prerequisites, class: "form-control", placeholder: "Enter prerequisites" %>
     </div>
 
-    <div class="field">
+    <div class="form-group">
       <%= f.hidden_field :course_id, value: @course.id %>
     </div>
 
-    <div class="actions">
+    <div class="form-group">
       <%= f.submit "Submit" ,class:"btn btn-success"%>
     </div>
 <% end %>
