@@ -39,6 +39,7 @@ db/*.sqlite3
 /doc/app/
 /doc/features.html
 /doc/specs.html
+/public/uploads
 /public/cache
 /public/stylesheets/compiled
 /public/system/*
@@ -82,3 +83,5 @@ pickle-email-*.html
 
 # tilde files are usually backup files from a text editor
 *~
+
+
