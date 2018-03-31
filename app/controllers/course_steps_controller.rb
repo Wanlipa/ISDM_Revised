@@ -1,18 +1,12 @@
 class CourseStepsController < ApplicationController
   skip_before_action :verify_authenticity_token
   include Wicked::Wizard
-  steps :about_course, :topics, :instructors, :course_meta
+  steps :about_course, :topics, :instructors, :course_meta, :course_analysis, :course_design
 
   def show
     @user = current_user
-    begin
-      @course = @user.courses.find(params[:course_id])
-      render_wizard
-    rescue => ex
-      flash[:error] = "Admin can edit courses at Admin Dashboard"
-      redirect_to welcome_index_path
-    end
-
+    @course = @user.courses.find(params[:course_id])
+    render_wizard
   end
 
   def update

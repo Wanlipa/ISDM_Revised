@@ -1,4 +1,5 @@
 <div class="container", style="margin-top: 30px">
+  <h1>Phase 1: Course Phase</h1>
   <ul class="pagination">
     <li class="page-item"><%= link_to 'Back', course_check_path(:id => @course.id),
                                       :data => {:confirm => 'Please make sure to insert course name, otherwise, course will not be saved.'},
@@ -8,7 +9,9 @@
     <li class="page-item"><%= link_to 'Step 2', wizard_path(:topics, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
     <li class="page-item"><%= link_to 'Step 3', wizard_path(:instructors, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
     <li class="page-item active"><%= link_to 'Step 4', wizard_path(:course_meta, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
-    <li class="page-item disabled"><%= link_to 'Next Step', next_wizard_path(:course_id => @course.id), class: "page-link" %></li>
+    <li class="page-item"><%= link_to 'Step 5', wizard_path(:course_analysis, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
+    <li class="page-item"><%= link_to 'Step 6', wizard_path(:course_design, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
+    <li class="page-item"><%= link_to 'Next Step', next_wizard_path(:course_id => @course.id), class: "page-link" %></li>
   </ul>
 </div>
 <div class="container">
@@ -16,48 +19,79 @@
   <%= form_for @course, url: wizard_path do |f| %>
     <h1 class="card-header">Course Metadata</h1>
       <div class="card-body">
+
         <div class="form-group">
           <%= f.label :length %><br>
-          <%= f.text_area :length, class: "form-control", placeholder: "Enter length" %>
+          <%= f.select :length, [['1 Week','1 Week'],
+                                 ['2 Week','2 Week'],
+                                 ['3 Week','3 Week'],
+                                 ['4 Week','4 Week'],
+                                 ['5 Week','5 Week'],
+                                 ['6 Week','6 Week'],
+                                 ['7 Week','7 Week'],
+                                 ['8 Week','8 Week'],
+                                 ['9 Week','9 Week'],
+                                 ['10 Week','10 Week'],
+                                 ['11 Week','11 Week'],
+                                 ['12 Week','12 Week'],
+                                 ['13 Week','13 Week'],
+                                 ['14 Week','14 Week'],
+                                 ['15 Week','15 Week'],
+                                 ['16 Week','16 Week']], {prompt: "Select length"}, {class: "form-control"} %>
         </div>
 
         <div class="form-group">
           <%= f.label :effort %><br>
-          <%= f.text_area :effort, class: "form-control", placeholder: "Enter effort" %>
+          <%= f.select :effort, [['1 to 2 hours per week','1 to 2 hours per week'],
+                                 ['3 to 4 hours per week','3 to 4 hours per week'],
+                                 ['5 to 6 hours per week','5 to 6 hours per week'],
+                                 ['7 to 8 hours per week','7 to 8 hours per week'],
+                                 ['9 to 10 hours per week','9 to 10 hours per week'],
+                                 ['11 to 12 hours per week','11 to 12 hours per week'],
+                                 ['13 to 14 hours per week','13 to 14 hours per week'],
+                                 ['15 to 16 hours per week','15 to 16 hours per week'],
+                                 ['17 to 18 hours per week','17 to 18 hours per week'],
+                                 ['19 to 20 hours per week','19 to 20 hours per week'],
+                                 ['21 to 22 hours per week','21 to 22 hours per week'],
+                                 ['23 to 24 hours per week','23 to 24 hours per week'],
+                                 ['25 to 26 hours per week','25 to 26 hours per week']], {prompt: "Select effort"}, {class: "form-control"} %>
         </div>
 
         <div class="form-group">
-          <%= f.label :price %><br>
-          <%= f.text_area :price, class: "form-control", placeholder: "Enter price" %>
+          <%= f.label :price %>&nbsp<span style="color: #999999;">(ex. FREE, Add a Verified Certificate for $49 USD)</span><br>
+          <%= f.text_field :price, class: "form-control", placeholder: "Enter price" %>
         </div>
 
         <div class="form-group">
-          <%= f.label :institution %><br>
-          <%= f.text_area :institution, class: "form-control", placeholder: "Enter institution" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :subject %><br>
-          <%= f.text_area :subject, class: "form-control", placeholder: "Enter subject" %>
+          <%= f.label :institution %>&nbsp<span style="color: #999999;">(ex. Microsoft, UC San DiegoX, UC BerkeleyX)</span><br>
+          <%= f.text_field :institution, class: "form-control", placeholder: "Enter institution" %>
         </div>
 
         <div class="form-group">
           <%= f.label :level %><br>
-          <%= f.text_area :level, class: "form-control", placeholder: "Enter level" %>
+          <%= f.select :level, [['Introductory','Introductory'],
+                                  ['Intermediate','Intermediate'],
+                                  ['Advanced','Advanced']], {prompt: "Select level"}, {class: "form-control"} %>
         </div>
 
         <div class="form-group">
           <%= f.label :languages %><br>
-          <%= f.text_area :languages, class: "form-control", placeholder: "Enter languages" %>
+          <%= f.select :languages, [['Chinese','Chinese'],
+                                    ['English','English'],
+                                    ['Japanese','Japanese'],
+                                    ['Thai','Thai'],], {prompt: "Select language"}, {class: "form-control"} %>
         </div>
 
         <div class="form-group">
           <%= f.label :video_transcript %><br>
-          <%= f.text_area :videots, class: "form-control", placeholder: "Enter video transcript" %>
+          <%= f.select :videots, [['Chinese','Chinese'],
+                                    ['English','English'],
+                                    ['Japanese','Japanese'],
+                                    ['Thai','Thai'],], {prompt: "Select video transcript"}, {class: "form-control"} %>
         </div>
 
         <div class="form-group">
-          <%= f.label :prerequisites %><br>
+          <%= f.label :prerequisites %>&nbsp<span style="color: #999999;">(ex. None, Familiarity with marketing and basic operations in Microsoft Excel preferred.)</span><br>
           <%= f.text_area :prerequisites, class: "form-control", placeholder: "Enter prerequisites" %>
         </div>
 

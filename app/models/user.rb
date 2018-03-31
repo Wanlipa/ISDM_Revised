@@ -5,10 +5,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  before_validation :assign_role
   has_many :courses
   belongs_to :role
-
-  before_validation :assign_role
 
   def assign_role
     self.role = Role.find_by_name("Member") if self.role.nil?
