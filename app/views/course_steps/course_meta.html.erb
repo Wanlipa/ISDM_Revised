@@ -9,17 +9,19 @@
     <li class="page-item"><%= link_to 'Step 2', wizard_path(:topics, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
     <li class="page-item"><%= link_to 'Step 3', wizard_path(:instructors, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
     <li class="page-item active"><%= link_to 'Step 4', wizard_path(:course_meta, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
-    <li class="page-item"><%= link_to 'Step 5', wizard_path(:course_analysis, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
-    <li class="page-item"><%= link_to 'Step 6', wizard_path(:course_design, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
+    <li class="page-item"><%= link_to 'Step 5', wizard_path(:objectives, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
+    <li class="page-item"><%= link_to 'Step 6', wizard_path(:targets, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
+    <li class="page-item"><%= link_to 'Step 7', wizard_path(:problems_solutions, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
+    <li class="page-item"><%= link_to 'Step 8', wizard_path(:chapters, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
+    <li class="page-item"><%= link_to 'Step 9', wizard_path(:evaluation, :course_id => @course.id), :method => :get ,class: "page-link" %></li>
     <li class="page-item"><%= link_to 'Next Step', next_wizard_path(:course_id => @course.id), class: "page-link" %></li>
   </ul>
 </div>
 <div class="container">
   <div class="card">
   <%= form_for @course, url: wizard_path do |f| %>
-    <h1 class="card-header">Course Metadata</h1>
+    <h1 class="card-header">Course metadata</h1>
       <div class="card-body">
-
         <div class="form-group">
           <%= f.label :length %><br>
           <%= f.select :length, [['1 Week','1 Week'],
@@ -100,8 +102,10 @@
         </div>
 
         <div class="form-group">
-          <%= f.submit "Submit" ,class:"btn btn-success"%>
+          <%= f.submit "Save and continue" ,class:"btn btn-success" %>
+          <%= button_to 'Skip', wizard_path(:topics),class:"btn btn-warning" %>
         </div>
+
       </div>
     </div>
 <% end %>

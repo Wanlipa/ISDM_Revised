@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180328214432) do
+ActiveRecord::Schema.define(version: 20180331180135) do
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -25,6 +25,16 @@ ActiveRecord::Schema.define(version: 20180328214432) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "chapters", force: :cascade do |t|
+    t.string "name"
+    t.string "start"
+    t.string "end"
+    t.integer "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_chapters_on_course_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.string "commenter"
     t.text "body"
@@ -36,8 +46,6 @@ ActiveRecord::Schema.define(version: 20180328214432) do
 
   create_table "courses", force: :cascade do |t|
     t.string "about_course"
-    t.string "topics"
-    t.string "instructors"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -54,14 +62,60 @@ ActiveRecord::Schema.define(version: 20180328214432) do
     t.string "avatar"
     t.string "status"
     t.integer "category_id"
+    t.string "outcome"
+    t.string "evaluation"
     t.index ["category_id"], name: "index_courses_on_category_id"
     t.index ["user_id"], name: "index_courses_on_user_id"
+  end
+
+  create_table "instructors", force: :cascade do |t|
+    t.string "name"
+    t.string "about_me"
+    t.string "institute"
+    t.string "avatar"
+    t.integer "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_instructors_on_course_id"
+  end
+
+  create_table "objectives", force: :cascade do |t|
+    t.string "objective"
+    t.integer "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_objectives_on_course_id"
+  end
+
+  create_table "problem_solutions", force: :cascade do |t|
+    t.string "problem"
+    t.string "solution"
+    t.integer "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_problem_solutions_on_course_id"
   end
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "targets", force: :cascade do |t|
+    t.string "name"
+    t.integer "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_targets_on_course_id"
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string "name"
+    t.integer "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_topics_on_course_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,0 +1,15 @@
+<div class="nested-fields">
+  <div class="field", style="margin-bottom: 10px">
+    <%= f.label :target_learner %>
+    <div style="margin-bottom: 10px">
+      <%= f.select :name, [['Pre-school','Pre-school'],
+                           ['Primary school','Primary school'],
+                           ['High school','High school'],
+                           ['Bachelors','Bachelors'],
+                           ['Masters','Masters'],
+                           ['Doctors','Doctors'],
+                           ['General','General']], {prompt: "Select target"}, {class: "form-control"} %>
+    </div>
+    <%= link_to_remove_association "Remove target", f, class:"btn btn-danger"%>
+  </div>
+</div>

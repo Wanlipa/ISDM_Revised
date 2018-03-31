@@ -1,0 +1,14 @@
+<div class="nested-fields">
+  <div class="form-group", style="margin-bottom: 10px">
+    <%= f.label :instructor_name %>
+    <%= f.text_field :name, label: false, class: "form-control", placeholder: "Enter instructor name"%>
+    <%= f.label :instructor_picture %><br>
+    <div style="margin-bottom: 10px">
+      <%= image_tag(f.object.avatar.url, size: "150x150") if f.object.avatar? %>
+    </div>
+    <div style="margin-bottom: 10px">
+      <%= f.file_field :avatar, class: "form-control-file" %>
+    </div>
+    <%= link_to_remove_association "Remove instructor", f, class:"btn btn-danger"%>
+  </div>
+</div>

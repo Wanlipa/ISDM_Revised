@@ -21,16 +21,21 @@
 
     <p>
       <strong>Topics:</strong>
-      <%= @course.topics %>
+      <ul>
+        <% @course.topics.each do |topic| %>
+          <li><%= topic.name %></li>
+        <% end %>
+      </ul>
     </p>
 
     <p>
-      <strong>Instructors:</strong>
-      <%= @course.instructors %>
+      <strong>Instructors:</strong><br>
+      <% @course.instructors.each do |instructor| %>
+        <%= image_tag(instructor.avatar.url, size: "200x200", :style => "border-radius: 50%") if instructor.avatar.present? %>
+        <%= instructor.name %>
+      <% end %>
       <br>
     </p>
-
-    <%= image_tag(@course.avatar.url, size: "200x200", :style => "border-radius: 50%") if @course.avatar.file.nil? == false %>
 
     <p>
       <strong>Length:</strong>
