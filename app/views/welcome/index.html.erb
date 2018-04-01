@@ -1,16 +1,52 @@
 
 <div class="container">
-  <div class="jumbotron" style="margin-top: 32px">
-    <h1>Welcome to ...</h1>
-    <h2>Online Course Design Support System</h2>
+  <div id="demo" class="carousel slide" data-ride="carousel" style= "margin-top: 15px;">
+
+    <!-- Indicators -->
+    <ul class="carousel-indicators">
+      <li data-target="#demo" data-slide-to="0" class="active"></li>
+      <li data-target="#demo" data-slide-to="1"></li>
+      <li data-target="#demo" data-slide-to="2"></li>
+    </ul>
+
+    <!-- The slideshow -->
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="/assets/banner1.jpg" alt="study" width="1100" height="450">
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/banner2.jpg" alt="study2" width="1100" height="450">
+      </div>
+      <div class="carousel-item">
+        <img src="/assets/banner3.png" alt="study3" width="1100" height="450">
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </a>
+  </div>
+
+  <div class="card" style="margin-top: 32px">
+    <div class="card-header bg-success text-white">
+      <h3 style="text-align: center">Welcome to Online Course Design Support System</h3>
+    </div>
+    <div class="card-body">
+      <!-- <%= link_to 'My Blog', controller: 'articles' %> -->
+      <% if current_user!=nil %>
+
+        <%= link_to 'Create course', user_course_steps_path(current_user.id), method: :post ,class: "btn btn-primary btn-lg btn-block" %>
+        <% if @courses.empty? == false %>
+          <%= link_to 'View all courses', course_index_path,class: "btn btn-primary btn-lg btn-block" %>
+        <% end %>
+      <% end %>
+    </div>
+
 
   </div>
-  <!-- <%= link_to 'My Blog', controller: 'articles' %> -->
-  <% if current_user!=nil %>
 
-    <%= link_to 'Create course', user_course_steps_path(current_user.id), method: :post ,class: "btn btn-primary btn-lg btn-block" %>
-    <% if @courses.empty? == false %>
-      <%= link_to 'View all courses', course_index_path,class: "btn btn-primary btn-lg btn-block" %>
-    <% end %>
-  <% end %>
 </div>
