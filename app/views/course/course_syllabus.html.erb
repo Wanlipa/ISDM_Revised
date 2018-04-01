@@ -1,84 +1,87 @@
-<h3 style="text-align: center">
-  Course Syllabus
-</h3></br>
+<div class="card ">
+  <div class="card-header bg-info text-white">
+    <h2 style="text-align: center">
+      Course Syllabus For Student
+    </h2>
+  </div>
+  <div class="card-body" style="text-align: justify">
 
-<div style="text-align: justify">
+    <p>
+      <strong>Course name:</strong>
+      <%= @course.courseName %>
+    </p>
 
-  <p>
-    <strong>Course name:</strong>
-    <%= @course.courseName %>
-  </p>
+    <p>
+      <strong>Category:</strong>
+      <%= @course.category.name %>
+    </p>
 
-  <p>
-    <strong>Category:</strong>
-    <%= @course.category.name %>
-  </p>
+    <p>
+      <strong>About course:</strong>
+      <%= @course.about_course %>
+    </p>
 
-  <p>
-    <strong>About course:</strong>
-    <%= @course.about_course %>
-  </p>
+    <p>
+      <strong>Topics:</strong>
+    <ul>
+      <% @course.topics.each do |topic| %>
+        <li><%= topic.name %></li>
+      <% end %>
+    </ul>
+    </p>
 
-  <p>
-    <strong>Topics:</strong>
-    <%= @course.topics %>
-  </p>
+    <p>
+      <strong>Instructors:</strong><br>
+      <% @course.instructors.each do |instructor| %>
+        <%= image_tag(instructor.avatar.current_path, size: "100x100", :style => "border-radius: 50%") if instructor.avatar.present? %>
+        <%= instructor.name %>
+      <% end %>
+      <br>
+    </p>
 
-  <p>
-    <strong>Instructors:</strong>
-    <%= @course.instructors %>
-    <br>
-  </p>
 
-  <%= image_tag(@course.avatar.current_path, size: "200x200", :style => "border-radius: 50%") if @course.avatar.file.nil? == false %>
+    <p>
+      <strong>Length:</strong>
+      <%= @course.length %>
+    </p>
 
-  <p>
-    <strong>Length:</strong>
-    <%= @course.length %>
-  </p>
+    <p>
+      <strong>Effort:</strong>
+      <%= @course.effort %>
+    </p>
 
-  <p>
-    <strong>Effort:</strong>
-    <%= @course.effort %>
-  </p>
+    <p>
+      <strong>Price:</strong>
+      <%= @course.price %>
+    </p>
 
-  <p>
-    <strong>Price:</strong>
-    <%= @course.price %>
-  </p>
+    <p>
+      <strong>Institution:</strong>
+      <%= @course.institution %>
+    </p>
 
-  <p>
-    <strong>Institution:</strong>
-    <%= @course.institution %>
-  </p>
+    <p>
+      <strong>Level:</strong>
+      <%= @course.level %>
+    </p>
 
-  <p>
-    <strong>Subject:</strong>
-    <%= @course.subject %>
-  </p>
+    <p>
+      <strong>Languages:</strong>
+      <%= @course.languages %>
+    </p>
 
-  <p>
-    <strong>Level:</strong>
-    <%= @course.level %>
-  </p>
+    <p>
+      <strong>Video Transcripts:</strong>
+      <%= @course.videots %>
+    </p>
 
-  <p>
-    <strong>Languages:</strong>
-    <%= @course.languages %>
-  </p>
+    <p>
+      <strong>Prerequisites:</strong>
+      <%= @course.prerequisites %>
+    </p>
 
-  <p>
-    <strong>Video Transcripts:</strong>
-    <%= @course.videots %>
-  </p>
-
-  <p>
-    <strong>Prerequisites:</strong>
-    <%= @course.prerequisites %>
-  </p>
-
+  </div>
 </div>
-
 
 
 

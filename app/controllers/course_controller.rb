@@ -64,4 +64,12 @@ class CourseController < ApplicationController
            :page_size => "A4",
            encoding: "UTF-8"
   end
+
+  def course_syllabus_instructor
+    @course = Course.find(params[:course_id])
+    render pdf: "Course_Syllabus",
+           :template => "course/course_syllabus_instructor.html.erb",
+           :page_size => "A4",
+           encoding: "UTF-8"
+  end
 end
