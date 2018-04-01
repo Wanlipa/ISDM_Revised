@@ -19,6 +19,8 @@ gem 'cancancan'
 
 # Admin Dashboard
 gem 'rails_admin', '~> 1.3'
+# Chart.js
+gem 'chart-js-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'

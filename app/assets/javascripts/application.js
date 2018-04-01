@@ -14,6 +14,7 @@
 //= require cocoon
 //= require popper
 //= require bootstrap-sprockets
+//= require Chart.min
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
@@ -38,3 +39,4 @@ $(document).ready(function(){
     $('#back-to-top').tooltip('show');
 
 });
+

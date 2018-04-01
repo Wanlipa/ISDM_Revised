@@ -5,4 +5,8 @@ class WelcomeController < ApplicationController
       @courses = @user.courses.all
     end
   end
+
+  def summary
+    @users = User.all
+  end
 end

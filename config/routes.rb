@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'course/check'
   devise_for :users
   get 'welcome/index'
+  get 'welcome/summary'
   root 'welcome#index'
   resources :articles do
     resources :comments
