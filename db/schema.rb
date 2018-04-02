@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20180331180135) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 20180331180135) do
     t.string "name"
     t.string "start"
     t.string "end"
-    t.integer "course_id"
+    t.bigint "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_chapters_on_course_id"
@@ -30,7 +33,7 @@ ActiveRecord::Schema.define(version: 20180331180135) do
 
   create_table "courses", force: :cascade do |t|
     t.string "about_course"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "length"
@@ -45,7 +48,7 @@ ActiveRecord::Schema.define(version: 20180331180135) do
     t.string "courseName"
     t.string "avatar"
     t.string "status"
-    t.integer "category_id"
+    t.bigint "category_id"
     t.string "outcome"
     t.string "evaluation"
     t.index ["category_id"], name: "index_courses_on_category_id"
@@ -57,7 +60,7 @@ ActiveRecord::Schema.define(version: 20180331180135) do
     t.string "about_me"
     t.string "institute"
     t.string "avatar"
-    t.integer "course_id"
+    t.bigint "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_instructors_on_course_id"
@@ -65,7 +68,7 @@ ActiveRecord::Schema.define(version: 20180331180135) do
 
   create_table "objectives", force: :cascade do |t|
     t.string "objective"
-    t.integer "course_id"
+    t.bigint "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_objectives_on_course_id"
@@ -74,7 +77,7 @@ ActiveRecord::Schema.define(version: 20180331180135) do
   create_table "problem_solutions", force: :cascade do |t|
     t.string "problem"
     t.string "solution"
-    t.integer "course_id"
+    t.bigint "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_problem_solutions_on_course_id"
@@ -88,7 +91,7 @@ ActiveRecord::Schema.define(version: 20180331180135) do
 
   create_table "targets", force: :cascade do |t|
     t.string "name"
-    t.integer "course_id"
+    t.bigint "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_targets_on_course_id"
@@ -96,7 +99,7 @@ ActiveRecord::Schema.define(version: 20180331180135) do
 
   create_table "topics", force: :cascade do |t|
     t.string "name"
-    t.integer "course_id"
+    t.bigint "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_topics_on_course_id"
@@ -115,10 +118,19 @@ ActiveRecord::Schema.define(version: 20180331180135) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "role_id"
+    t.bigint "role_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "chapters", "courses"
+  add_foreign_key "courses", "categories"
+  add_foreign_key "courses", "users"
+  add_foreign_key "instructors", "courses"
+  add_foreign_key "objectives", "courses"
+  add_foreign_key "problem_solutions", "courses"
+  add_foreign_key "targets", "courses"
+  add_foreign_key "topics", "courses"
+  add_foreign_key "users", "roles"
 end
