@@ -44,6 +44,8 @@ class CourseStepsController < ApplicationController
       params.require(:course).permit(:courseName, :about_course, :length,
                                      :effort, :price, :institution, :subject, :level, :languages,:outcome, :evaluation,
                                      :videots, :prerequisites, :avatar, :status, :category_id,
+                                     :effort, :price, :institution, :subject, :level, :languages, :evaluation,
+                                     :videots, :prerequisites, :avatar, :status, :category_id,
                                      topics_attributes: [:id, :name, :_destroy],
                                      instructors_attributes: [:id, :name, :avatar, :_destroy],
                                      targets_attributes: [:id, :name, :_destroy],
