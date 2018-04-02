@@ -1,7 +1,7 @@
 class CourseStepsController < ApplicationController
   skip_before_action :verify_authenticity_token
   include Wicked::Wizard
-  steps :about_course, :topics, :instructors, :course_meta, :objectives, :targets, :problems_solutions, :chapters, :outcome, :evaluation
+  steps :about_course, :topics, :instructors, :course_meta, :objectives, :targets, :problems_solutions, :chapters, :evaluation
 
   def show
 
@@ -42,8 +42,8 @@ class CourseStepsController < ApplicationController
   private
     def course_params
       params.require(:course).permit(:courseName, :about_course, :length,
-                                     :effort, :price, :institution, :subject, :level, :languages, :evaluation,
-                                     :videots, :prerequisites, :avatar, :status, :category_id,:outcome,
+                                     :effort, :price, :institution, :subject, :level, :languages,:outcome, :evaluation,
+                                     :videots, :prerequisites, :avatar, :status, :category_id,
                                      topics_attributes: [:id, :name, :_destroy],
                                      instructors_attributes: [:id, :name, :avatar, :_destroy],
                                      targets_attributes: [:id, :name, :_destroy],
