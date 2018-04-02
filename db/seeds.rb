@@ -12,8 +12,31 @@ Category.create([{name: 'Architecture'},
                  { name: 'Biology & Life Sciences'},
                  { name: 'Business & Management'},
                  { name: 'Chemistry'},
-                 { name: 'Computer Science'}
-                ])
+                 { name: 'Communication'},
+                 { name: 'Computer Science'},
+                 { name: 'Data Analysis & Statistics'},
+                 { name: 'Design'},
+                 { name: 'Economics & Finance'},
+                 { name: 'Education & Teaching Training'},
+                 { name: 'Electronics'},
+                 { name: 'Energy & Earth Sciences'},
+                 { name: 'Engineering'},
+                 { name: 'Environmental Studies'},
+                 { name: 'Ethics'},
+                 { name: 'Food & Nutrition'},
+                 { name: 'Health & Safety'},
+                 { name: 'History'},
+                 { name: 'Humanities'},
+                 { name: 'Language'},
+                 { name: 'Law'},
+                 { name: 'Literature'},
+                 { name: 'Math'},
+                 { name: 'Medicine'},
+                 { name: 'Music'},
+                 { name: 'Philosophy & Ethics'},
+                 { name: 'Physics'},
+                 { name: 'Science'},
+                 { name: 'Social Sciences'}])
 
 # Initial Data for Role
 @admin = Role.create(name: "Admin")
