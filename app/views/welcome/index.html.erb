@@ -38,10 +38,11 @@
     <div class="card-body">
       <!-- <%= link_to 'My Blog', controller: 'articles' %> -->
       <% if current_user!=nil %>
-
-        <%= link_to 'Create course', user_course_steps_path(current_user.id), method: :post ,class: "btn btn-primary btn-lg btn-block" %>
-        <% if @courses.empty? == false %>
-          <%= link_to 'View all courses', course_index_path,class: "btn btn-primary btn-lg btn-block" %>
+        <% if current_user.admin? == false %>
+          <%= link_to 'Create course', user_course_steps_path(current_user.id), method: :post ,class: "btn btn-primary btn-lg btn-block" %>
+        <% end %>
+        <% if @courses.present? %>
+          <%= link_to 'View all courses', course_index_path, class: "btn btn-primary btn-lg btn-block" %>
         <% end %>
       <% end %>
     </div>

@@ -4,13 +4,13 @@ class CourseController < ApplicationController
 
   def index
     @user = current_user
-    @courses = @user.courses.all
-    if @courses.empty?
-      redirect_to welcome_index_path
-    end
-
     if current_user.admin?
       @courses = Course.all
+    else
+      @courses = @user.courses.all
+    end
+    if @courses.empty?
+      redirect_to welcome_index_path
     end
   end
 

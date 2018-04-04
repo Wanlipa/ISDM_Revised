@@ -4,16 +4,9 @@ class CourseStepsController < ApplicationController
   steps :about_course, :topics, :instructors, :course_meta, :objectives, :targets, :problems_solutions, :chapters, :evaluation
 
   def show
-
-    if current_user.admin?
-      flash[:error] = "Admin can edit at Admin Dashboard."
-      redirect_to welcome_index_path
-    else
-      @user = current_user
-      @course = @user.courses.find(params[:course_id])
-      render_wizard
-    end
-
+    @user = current_user
+    @course = @user.courses.find(params[:course_id])
+    render_wizard
   end
 
   def update
@@ -34,17 +27,20 @@ class CourseStepsController < ApplicationController
   end
 
   def create
-    @user = current_user
-    @course = @user.courses.create(:category_id => 1)
-    redirect_to wizard_path(steps.first, :course_id => @course.id)
+    if current_user.admin?
+      flash[:error] = "Admin can edit at Admin Dashboard."
+      redirect_to welcome_index_path
+    else
+      @user = current_user
+      @course = @user.courses.create(:category_id => 1)
+      redirect_to wizard_path(steps.first, :course_id => @course.id)
+    end
   end
 
   private
     def course_params
       params.require(:course).permit(:courseName, :about_course, :length,
                                      :effort, :price, :institution, :subject, :level, :languages,:outcome, :evaluation,
-                                     :videots, :prerequisites, :avatar, :status, :category_id,
-                                     :effort, :price, :institution, :subject, :level, :languages, :evaluation,
                                      :videots, :prerequisites, :avatar, :status, :category_id,
                                      topics_attributes: [:id, :name, :_destroy],
                                      instructors_attributes: [:id, :name, :avatar, :_destroy],
