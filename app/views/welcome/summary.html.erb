@@ -1,21 +1,19 @@
 <div class="container">
   <h1 style="color: darkslateblue; margin-top: 10px;">Summary Report</h1>
-  <canvas id="myChart"></canvas>
+  <canvas id="myPieChart"></canvas>
+
+
 </div>
 
 <script>
-    var ctx = document.getElementById("myChart").getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
+
+    var ctx2 = document.getElementById("myPieChart").getContext('2d');
+    // And for a doughnut chart
+    var myPieChart = new Chart(ctx2, {
+        type: 'pie',
         data: {
-            // labels: ["<%= User.find(1).email %>", "Blue", "Yellow", "Green", "Purple", "Orange"],
-
             labels: [<% @users.each do |user| %>  "<%= user.email %>", <% end %>],
-
             datasets: [{
-                label: 'Number of Courses that created by user',
-                // data: [12, 19, 3, 5, 2, 3],
-
                 data: [<% @users.each do |user| %>  <%= Course.where(:user_id => user.id).count %>, <% end %>],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -34,16 +32,10 @@
                     'rgba(255, 159, 64, 1)'
                 ],
                 borderWidth: 1
+
             }]
         },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero:true
-                    }
-                }]
-            }
-        }
+        options: {}
     });
+
 </script>
