@@ -1,4 +1,6 @@
 class Course < ApplicationRecord
+  has_many :outcomes
+  accepts_nested_attributes_for :outcomes, reject_if: :all_blank, allow_destroy: true
   has_many :targets
   accepts_nested_attributes_for :targets, reject_if: :all_blank, allow_destroy: true
   has_many :instructors
