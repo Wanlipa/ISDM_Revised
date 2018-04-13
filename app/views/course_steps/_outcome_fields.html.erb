@@ -8,8 +8,16 @@
                               ['Analyze', 'Analyze'],
                               ['Evaluate', 'Evaluate'],
                               ['Create', 'Create']], {prompt: "Select learning outcome"}, {class: "form-control"} %>
+
+      <%= f.fields_for :techniques do |technique| %>
+        <%= render 'technique_fields', f: technique, class: "form-control" %>
+      <% end %>
     </div>
-    <%= link_to_remove_association "Remove outcome", f, class:"btn btn-danger"%>
+    <div>
+      <%= link_to_add_association 'Add technique', f, :techniques, class: "btn btn-primary" %>
+    </div>
+
+    <%= link_to_remove_association 'Remove outcome', f, class: "btn btn-danger" %>
+    <hr style="height: 12px; border: 0; box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);">
   </div>
-  <hr style="height: 12px; border: 0; box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);">
 </div>

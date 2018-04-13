@@ -24,8 +24,7 @@
     <h3 class="card-header">Outcomes</h3>
     <div class="card-body">
       <%= form_for @course, url: wizard_path do |f| %>
-
-        <div class="outcomes">
+        <div class="outcome">
           <%= f.fields_for :outcomes do |outcome| %>
             <%= render 'outcome_fields', f: outcome, class: "form-control" %>
           <% end %>

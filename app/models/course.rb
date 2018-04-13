@@ -1,9 +1,9 @@
 class Course < ApplicationRecord
-  has_many :outcomes
+  has_many :outcomes, :dependent => :destroy
   accepts_nested_attributes_for :outcomes, reject_if: :all_blank, allow_destroy: true
-  has_many :targets
+  has_many :targets, :dependent => :destroy
   accepts_nested_attributes_for :targets, reject_if: :all_blank, allow_destroy: true
-  has_many :instructors
+  has_many :instructors, :dependent => :destroy
   accepts_nested_attributes_for :instructors, reject_if: :all_blank, allow_destroy: true
   has_many :topics, dependent: :destroy
   accepts_nested_attributes_for :topics, reject_if: :all_blank, allow_destroy: true

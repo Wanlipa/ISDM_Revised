@@ -38,6 +38,10 @@ class CourseStepsController < ApplicationController
     else
       @user = current_user
       @course = @user.courses.create(:category_id => 1)
+      @course.outcomes.build
+      @course.outcomes.each do |o|
+        o.techniques.build
+      end
       redirect_to wizard_path(steps.first, :course_id => @course.id)
     end
   end
@@ -50,8 +54,9 @@ class CourseStepsController < ApplicationController
                                      topics_attributes: [:id, :name, :_destroy],
                                      instructors_attributes: [:id, :name, :avatar, :_destroy],
                                      targets_attributes: [:id, :name, :_destroy],
-                                     outcomes_attributes: [:id, :outcome, :_destroy],
-                                     objectives_attributes: [:id, :objective, :_destroy],
+                                     outcomes_attributes: [:id, :outcome, :_destroy, techniques_attributes: [:id, :name, :_destroy]],
+                                     techniques_attributes: [:id, :name, :_destroy],
+                                     objectives_attributes: [:id, :objective, :technique, :_destroy],
                                      problem_solutions_attributes: [:id, :problem, :solution, :_destroy],
                                      chapters_attributes: [:id, :name, :start, :end, :_destroy])
     end
