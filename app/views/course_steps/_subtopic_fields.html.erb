@@ -1,0 +1,18 @@
+<div class="nested-fields">
+  <div class="field offset-lg-3" , style="margin-bottom: 10px">
+    <%= f.label :sub_topic %>
+    <div style="margin-bottom: 10px">
+      <%= f.text_field :name, label: false, class: "form-control", placeholder: "Enter subtopic" %>
+    </div>
+    <%= f.label :"Materials/techniques used for teaching" %>
+    <div style="margin-bottom: 10px">
+      <%= f.collection_check_boxes :material_ids, Material.all, :id, :name do |m| %>
+        <div class="collection-check-box">
+          <%= m.check_box %>
+          <%= m.label %>
+        </div>
+      <% end %>
+    </div>
+    <%= link_to_remove_association "Remove sub topic", f, class: "btn btn-danger" %>
+  </div>
+</div>

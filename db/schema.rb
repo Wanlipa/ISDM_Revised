@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180413160714) do
+ActiveRecord::Schema.define(version: 20180414064619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20180413160714) do
     t.bigint "category_id"
     t.string "outcome"
     t.string "evaluation"
+    t.integer "length"
     t.index ["category_id"], name: "index_courses_on_category_id"
     t.index ["user_id"], name: "index_courses_on_user_id"
   end
@@ -63,6 +64,20 @@ ActiveRecord::Schema.define(version: 20180413160714) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_instructors_on_course_id"
+  end
+
+  create_table "maintopics", force: :cascade do |t|
+    t.string "name"
+    t.bigint "chapter_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chapter_id"], name: "index_maintopics_on_chapter_id"
+  end
+
+  create_table "materials", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "objectives", force: :cascade do |t|
@@ -94,6 +109,14 @@ ActiveRecord::Schema.define(version: 20180413160714) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "subtopics", force: :cascade do |t|
+    t.string "name"
+    t.bigint "maintopic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["maintopic_id"], name: "index_subtopics_on_maintopic_id"
   end
 
   create_table "targets", force: :cascade do |t|
@@ -139,15 +162,29 @@ ActiveRecord::Schema.define(version: 20180413160714) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  create_table "uses", force: :cascade do |t|
+    t.integer "time"
+    t.bigint "material_id"
+    t.bigint "subtopic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_id"], name: "index_uses_on_material_id"
+    t.index ["subtopic_id"], name: "index_uses_on_subtopic_id"
+  end
+
   add_foreign_key "chapters", "courses"
   add_foreign_key "courses", "categories"
   add_foreign_key "courses", "users"
   add_foreign_key "instructors", "courses"
+  add_foreign_key "maintopics", "chapters"
   add_foreign_key "objectives", "courses"
   add_foreign_key "outcomes", "courses"
   add_foreign_key "problem_solutions", "courses"
+  add_foreign_key "subtopics", "maintopics"
   add_foreign_key "targets", "courses"
   add_foreign_key "techniques", "outcomes"
   add_foreign_key "topics", "courses"
   add_foreign_key "users", "roles"
+  add_foreign_key "uses", "materials"
+  add_foreign_key "uses", "subtopics"
 end

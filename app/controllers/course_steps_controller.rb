@@ -42,13 +42,23 @@ class CourseStepsController < ApplicationController
       @course.outcomes.each do |o|
         o.techniques.build
       end
+      @course.chapters.build
+      @course.chapters.each do |c|
+        c.maintopics.build
+        c.maintopics.each do |m|
+          m.subtopics.build
+          m.subtopics.each do |s|
+            s.materials.build
+          end
+        end
+      end
       redirect_to wizard_path(steps.first, :course_id => @course.id)
     end
   end
 
   private
     def course_params
-      params.require(:course).permit(:courseName, :about_course,
+      params.require(:course).permit(:courseName, :about_course, :length,
                                      :effort, :price, :institution, :subject, :level, :languages, :evaluation,
                                      :videots, :prerequisites, :avatar, :status, :category_id,
                                      topics_attributes: [:id, :name, :_destroy],
@@ -58,6 +68,8 @@ class CourseStepsController < ApplicationController
                                      techniques_attributes: [:id, :name, :_destroy],
                                      objectives_attributes: [:id, :objective, :technique, :_destroy],
                                      problem_solutions_attributes: [:id, :problem, :solution, :_destroy],
-                                     chapters_attributes: [:id, :name, :start, :end, :_destroy])
+                                     chapters_attributes: [:id, :name, :start, :end, :_destroy,
+                                                           maintopics_attributes: [:id, :name, :_destroy,
+                                                                                   subtopics_attributes: [:id, :name, :_destroy, material_ids: []]]])
     end
 end

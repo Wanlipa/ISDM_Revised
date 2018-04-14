@@ -3,43 +3,16 @@
     <div class="field", style="margin-bottom: 10px">
       <%= f.label :chapter_name %>
       <%= f.text_field :name, label: false, class: "form-control", placeholder: "Enter chapter name"%>
-      <%= f.label :start_time %>
-      <%= f.select :start, [['1st week','1st week'],
-                             ['2nd week','2nd week'],
-                             ['3rd week','3rd week'],
-                             ['4th week','4th week'],
-                             ['5th week','5th week'],
-                             ['6th week','6th week'],
-                             ['7th week','7th week'],
-                             ['8th week','8th week'],
-                             ['9th week','9th week'],
-                             ['10th week','10th week'],
-                             ['11st week','11st week'],
-                             ['12nd week','12nd week'],
-                             ['13rd week','13rd week'],
-                             ['14th week','14th week'],
-                             ['15th week','15th week'],
-                             ['16th week','16th week'],
-                             ['17th week','17th week'],], {prompt: "Select start time"}, {class: "form-control"} %>
-      <%= f.label :end_time %>
-      <%= f.select :end, [['1st week','1st week'],
-                             ['2nd week','2nd week'],
-                             ['3rd week','3rd week'],
-                             ['4th week','4th week'],
-                             ['5th week','5th week'],
-                             ['6th week','6th week'],
-                             ['7th week','7th week'],
-                             ['8th week','8th week'],
-                             ['9th week','9th week'],
-                             ['10th week','10th week'],
-                             ['11st week','11st week'],
-                             ['12nd week','12nd week'],
-                             ['13rd week','13rd week'],
-                             ['14th week','14th week'],
-                             ['15th week','15th week'],
-                             ['16th week','16th week'],
-                             ['17th week','17th week'],], {prompt: "Select end time"}, {class: "form-control"} %>
+    </div>
+
+    <%= f.fields_for :maintopics do |maintopic| %>
+      <%= render 'maintopic_fields', f: maintopic, class: "form-control" %>
+    <% end %>
+
+    <div class="offset-lg-2">
+      <%= link_to_add_association 'Add main topic', f, :maintopics, class: "btn btn-primary" %>
     </div>
     <%= link_to_remove_association "Remove chapter", f, class:"btn btn-danger"%>
+    <hr style="height: 12px; border: 0; box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);">
   </div>
 </div>

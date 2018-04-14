@@ -6,6 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Material.create( [{name: 'Power Point'},
+                 {name: 'PDF sheets'},
+                 {name: 'Question Practices'},
+                 {name: 'Video'}])
 
 Category.create([{name: 'Architecture'},
                  { name: 'Art & Culture'},
