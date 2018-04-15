@@ -11,7 +11,6 @@
                            :min => 0,
                            :max => @course.length, label: false, :onkeydown => "myFunction()",
                            :onchange => "myFunction()", class: "form-control xr",
-                           :placeholder => "0",
                            id: 'time' %>
       </div>
     </div>
@@ -48,11 +47,14 @@
         var t = document.getElementsByClassName("form-control xr");
         var sum = 0;
         var i;
+        var temp;
         for(i=0; i<t.length; i++) {
             if (t[i].value === '') {
-                t[i].value = 0;
+                temp = 0;
+            } else {
+                temp = t[i].value;
             }
-            sum = sum + parseInt(t[i].value);
+            sum = sum + parseInt(temp);
         }
         y.innerHTML = <%= @course.length %> - sum;
     }
