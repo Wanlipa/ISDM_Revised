@@ -30,7 +30,7 @@
           <h4 style="text-align: right">
             <span style="font-style: normal">Total minutes left: </span>
             <% if @course.length.present? %>
-              <%= @course.length %>
+              <span id="courseLength"><%= @course.length %></span>
             <% else %>
               0
             <% end %>

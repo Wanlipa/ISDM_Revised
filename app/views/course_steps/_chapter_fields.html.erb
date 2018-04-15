@@ -1,8 +1,14 @@
 <div class="nested-fields">
   <div class="field", style="margin-bottom: 10px">
-    <div class="field", style="margin-bottom: 10px">
-      <%= f.label :chapter_name %>
-      <%= f.text_field :name, label: false, class: "form-control", placeholder: "Enter chapter name"%>
+    <div class="row", style="margin-bottom: 10px">
+      <div class="col-lg-10">
+        <%= f.label :chapter_name %>
+        <%= f.text_field :name, label: false, class: "form-control", placeholder: "Enter chapter name" %>
+      </div>
+      <div class="col-lg-2">
+        <%= f.label :time %>
+        <%= f.number_field :time, :min => 0, :max => @course.length, label: false, :onkeydown => "myFunction()",:onchange => "myFunction()", class: "form-control xr", placeholder: "Enter time", id: 'time' %>
+      </div>
     </div>
 
     <%= f.fields_for :maintopics do |maintopic| %>
@@ -16,3 +22,19 @@
     <hr style="height: 12px; border: 0; box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);">
   </div>
 </div>
+
+
+<script>
+    function myFunction() {
+        var y = document.getElementById("courseLength");
+        var t = document.getElementsByClassName("form-control xr");
+        var sum = 0;
+        var i;
+        for(i=0; i<t.length; i++) {
+            sum = sum + parseInt(t[i].value);
+            console.log("sum " + sum);
+        }
+        console.log("xs " + sum)
+        y.innerHTML = <%= @course.length %> - sum;
+    }
+</script>

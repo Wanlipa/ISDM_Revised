@@ -68,7 +68,7 @@ class CourseStepsController < ApplicationController
                                      techniques_attributes: [:id, :name, :_destroy],
                                      objectives_attributes: [:id, :objective, :technique, :_destroy],
                                      problem_solutions_attributes: [:id, :problem, :solution, :_destroy],
-                                     chapters_attributes: [:id, :name, :start, :end, :_destroy,
+                                     chapters_attributes: [:id, :name, :time, :_destroy,
                                                            maintopics_attributes: [:id, :name, :_destroy,
                                                                                    subtopics_attributes: [:id, :name, :_destroy, material_ids: []]]])
     end
