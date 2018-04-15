@@ -7,7 +7,12 @@
       </div>
       <div class="col-lg-2">
         <%= f.label :time %>
-        <%= f.number_field :time, :value => 0, :min => 0, :max => @course.length, label: false, :onkeydown => "myFunction()",:onchange => "myFunction()", class: "form-control xr", placeholder: "Enter time", id: 'time' %>
+        <%= f.number_field :time,
+                           :min => 0,
+                           :max => @course.length, label: false, :onkeydown => "myFunction()",
+                           :onchange => "myFunction()", class: "form-control xr",
+                           :placeholder => "0",
+                           id: 'time' %>
       </div>
     </div>
 
@@ -28,7 +33,7 @@
     // call myFunction() every second to prevent the situation that user remove his chapters, so the total minutes will be recalculated
     window.setInterval(function(){
         myFunction()
-    }, 500);
+    }, 50);
 
 
     // this one will execute one time once page is loaded
@@ -44,6 +49,9 @@
         var sum = 0;
         var i;
         for(i=0; i<t.length; i++) {
+            if (t[i].value === '') {
+                t[i].value = 0;
+            }
             sum = sum + parseInt(t[i].value);
         }
         y.innerHTML = <%= @course.length %> - sum;
