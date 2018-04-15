@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   devise_for :users
   get 'welcome/index'
   get 'welcome/summary'
-  root 'welcome#index'
+  root 'welcome#preindex'
   resources :articles do
     resources :comments
   end

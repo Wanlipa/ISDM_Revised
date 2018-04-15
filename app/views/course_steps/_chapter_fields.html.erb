@@ -25,6 +25,13 @@
 
 
 <script>
+    // this one will execute one time once page is loaded
+    window.onload = function () {
+        myFunction();
+    };
+
+    // this function takes me so long to come up with it, it is going to retrieve the value for every field that has class name as "form-control xr"
+    // which is actually every number fields on this page, then sum its value up and decrease the total course length by the sum's value.
     function myFunction() {
         var y = document.getElementById("courseLength");
         var t = document.getElementsByClassName("form-control xr");
