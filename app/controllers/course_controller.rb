@@ -25,6 +25,11 @@ class CourseController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
+    @technique = Technique.all
+    @maintopic = Maintopic.all
+    @subtopic = Subtopic.all
+    @use = Use.all
+
     @check = @course.avatar.file.nil?
 
     if current_user.admin?
@@ -67,6 +72,10 @@ class CourseController < ApplicationController
 
   def course_syllabus_instructor
     @course = Course.find(params[:course_id])
+    @technique = Technique.all
+    @maintopic = Maintopic.all
+    @subtopic = Subtopic.all
+    @use = Use.all
     render pdf: "Course_Syllabus",
            :template => "course/course_syllabus_instructor.html.erb",
            :page_size => "A4",

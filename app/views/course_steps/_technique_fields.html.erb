@@ -2,14 +2,7 @@
   <div class="field offset-lg-2" , style="margin-bottom: 10px">
     <%= f.label :technique %>
     <div style="margin-bottom: 10px">
-      <%= f.select :name, [['Matching', 'Matching'],
-                           ['True/False', 'True/False'],
-                           ['Multiple Choice', 'Multiple Choice'],
-                           ['Equation/Calculation', 'Equation/Calculation'],
-                           ['Short Answer', 'Short Answer'],
-                           ['Long Essay', 'Long Essay'],
-                           ['Essay with Case Study', 'Essay with Case Study'],
-                           ['Drawing/Sketching', 'Drawing/Sketching'],], {prompt: "Select technique"}, {class: "form-control"} %>
+      <%= f.text_field :name, label: false, class: "form-control", placeholder: "Enter subtopic" %>
     </div>
     <%= link_to_remove_association "Remove technique", f, class: "btn btn-danger" %>
   </div>

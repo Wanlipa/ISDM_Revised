@@ -112,7 +112,18 @@
 
       <p>
         <strong>Outcome:</strong>
-        <%= @course.outcome %>
+      <ul>
+        <% @course.outcomes.each do |outcome| %>
+          <% @tech = outcome.id %>
+          <li><%= outcome.outcome %>
+            <ul>
+              <% @technique.where(outcome_id: @tech).each do |technique| %>
+                <li><%= technique.name %></li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
       </p>
 
       <p>
@@ -140,18 +151,36 @@
       <p>
         <strong>Chapter & Schedule:</strong>
       <table class="table table-hover">
-        <thead class="thead-dark">
-          <th>Chapter Name</th>
-          <th>Start</th>
-          <th>End</th>
+        <thead class="thead-dark" style="text-align: center">
+        <th>Length(Minutes)</th>
+        <th>Chapter Information</th>
         </thead>
         <tbody>
         <% @course.chapters.each do |chapter| %>
-        <tr>
-          <td><%= chapter.name %></td>
-          <td><%= chapter.start %></td>
-          <td><%= chapter.end %></td>
-        </tr>
+          <tr>
+            <td style="text-align: center"><%= chapter.time %></td>
+            <td><%= chapter.name %>
+            <ul>
+                <% @maintopic.where(chapter_id: chapter.id).each do |maintopic| %>
+                <li><%= maintopic.name %>
+                  <ul>
+                    <% @subtopic.where(maintopic_id: maintopic.id).each do |subtopic| %>
+                      <li><%= subtopic.name %>
+                        <ul>
+                          <% @use.where(subtopic_id: subtopic.id).each do |use| %>
+                            <% @material = Material.find(use.material_id)%>
+                            <li><%= @material.name %>
+                            </li>
+                          <% end %>
+                        </ul>
+                      </li>
+                    <% end %>
+                  </ul>
+                </li>
+                <% end %>
+            </ul>
+            </td>
+          </tr>
         <% end %>
         </tbody>
       </table>
