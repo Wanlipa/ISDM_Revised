@@ -7,7 +7,7 @@
       </div>
       <div class="col-lg-2">
         <%= f.label :time %>
-        <%= f.number_field :time, :min => 0, :max => @course.length, label: false, :onkeydown => "myFunction()",:onchange => "myFunction()", class: "form-control xr", placeholder: "Enter time", id: 'time' %>
+        <%= f.number_field :time, :value => 0, :min => 0, :max => @course.length, label: false, :onkeydown => "myFunction()",:onchange => "myFunction()", class: "form-control xr", placeholder: "Enter time", id: 'time' %>
       </div>
     </div>
 
@@ -18,13 +18,19 @@
     <div class="offset-lg-2">
       <%= link_to_add_association 'Add main topic', f, :maintopics, class: "btn btn-primary" %>
     </div>
-    <%= link_to_remove_association "Remove chapter", f, class:"btn btn-danger"%>
+    <%= link_to_remove_association "Remove chapter", f, class:"btn btn-danger" %>
     <hr style="height: 12px; border: 0; box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);">
   </div>
 </div>
 
 
 <script>
+    // call myFunction() every second to prevent the situation that user remove his chapters, so the total minutes will be recalculated
+    window.setInterval(function(){
+        myFunction()
+    }, 500);
+
+
     // this one will execute one time once page is loaded
     window.onload = function () {
         myFunction();
@@ -39,9 +45,7 @@
         var i;
         for(i=0; i<t.length; i++) {
             sum = sum + parseInt(t[i].value);
-            console.log("sum " + sum);
         }
-        console.log("xs " + sum)
         y.innerHTML = <%= @course.length %> - sum;
     }
 </script>
