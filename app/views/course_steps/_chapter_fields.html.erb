@@ -10,7 +10,7 @@
         <%= f.number_field :time,
                            :min => 0,
                            :max => @course.length, label: false, :onkeydown => "myFunction()",
-                           :onchange => "myFunction()", class: "form-control xr",
+                           :onchange => "myFunction(true)", class: "form-control xr",
                            id: 'time' %>
       </div>
     </div>
@@ -31,31 +31,51 @@
 <script>
     // call myFunction() every second to prevent the situation that user remove his chapters, so the total minutes will be recalculated
     window.setInterval(function(){
-        myFunction()
+        var cl = document.getElementById("courseLength");
+        if (cl == null) {
+            var nf = document.getElementsByClassName("form-control xr");
+            for (j = 0; j < nf.length; j++) {
+                nf[j].setAttribute("max", 0);
+            }
+        } else {
+            var nf = document.getElementsByClassName("form-control xr");
+            for (j = 0; j < nf.length; j++) {
+                nf[j].setAttribute("max", <%= @course.length %>);
+            }
+        }
+        myFunction(false);
     }, 50);
 
 
     // this one will execute one time once page is loaded
     window.onload = function () {
-        myFunction();
+        myFunction(false);
     };
+
 
     // this function takes me so long to come up with it, it is going to retrieve the value for every field that has class name as "form-control xr"
     // which is actually every number fields on this page, then sum its value up and decrease the total course length by the sum's value.
-    function myFunction() {
+    function myFunction(isClickedOnNumberField) {
         var y = document.getElementById("courseLength");
-        var t = document.getElementsByClassName("form-control xr");
-        var sum = 0;
-        var i;
-        var temp;
-        for(i=0; i<t.length; i++) {
-            if (t[i].value === '') {
-                temp = 0;
-            } else {
-                temp = t[i].value;
+        if(y != null) {
+            var t = document.getElementsByClassName("form-control xr");
+            var sum = 0;
+            var i;
+            var temp;
+            for (i = 0; i < t.length; i++) {
+                if (t[i].value === '') {
+                    temp = 0;
+                } else {
+                    temp = t[i].value;
+                }
+                sum = sum + parseInt(temp);
             }
-            sum = sum + parseInt(temp);
+            y.innerHTML = <%= @course.length %> -sum;
+            if (isClickedOnNumberField && y.innerHTML < 0) {
+                alert("WARNING: You have just added too much time for chapters, it exceeds course length already !!!!")
+            }
+        } else if(isClickedOnNumberField) {
+            alert("You must specify course length in step 4 first !");
         }
-        y.innerHTML = <%= @course.length %> - sum;
     }
 </script>
