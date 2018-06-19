@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course_id: 
+  chname: MyString
+  outcome: MyString
+  chapter: one
+  outcome: one
+
+two:
+  course_id: 
+  chname: MyString
+  outcome: MyString
+  chapter: two
+  outcome: two

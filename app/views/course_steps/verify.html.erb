@@ -1,0 +1,118 @@
+<div class="container", style="margin-top: 30px">
+  <h1>Phase 3: Design Phase</h1>
+  <ul class="pagination">
+    <li class="page-item"><%= link_to 'Back', course_check_path(:id => @course.id),
+                                      :data => {:confirm => 'Please make sure to insert course name, otherwise, course will not be saved.'},
+                                      class: "page-link" %>
+    </li>
+    <li class="page-item"><%= link_to 'Step 1', wizard_path(:about_course, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'About this Course'%></li>
+    <li class="page-item"><%= link_to 'Step 2', wizard_path(:topics, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Topics'%></li>
+    <li class="page-item"><%= link_to 'Step 3', wizard_path(:instructors, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Instructors'%></li>
+    <li class="page-item"><%= link_to 'Step 4', wizard_path(:course_meta, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Course Metadata'%></li>
+    <li class="page-item"><%= link_to 'Step 5', wizard_path(:objectives, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Objectives'%></li>
+    <li class="page-item"><%= link_to 'Step 6', wizard_path(:targets, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Targets'%></li>
+    <li class="page-item"><%= link_to 'Step 7', wizard_path(:outcomes, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Outcomes'%></li>
+    <li class="page-item"><%= link_to 'Step 8', wizard_path(:problems_solutions, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Problems and Solutions'%></li>
+    <li class="page-item"><%= link_to 'Step 9', wizard_path(:chapters, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Chapter and Schedule'%></li>
+    <li class="page-item"><%= link_to 'Step 10', wizard_path(:evaluation, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Evaluation Technique'%></li>
+    <li class="page-item active"><%= link_to 'Step 11', wizard_path(:verify, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Verify Outcome'%></li>
+    <li class="page-item disabled"><%= link_to 'Next Step', next_wizard_path(:course_id => @course.id), class: "page-link" %></li>
+  </ul>
+</div>
+
+<div class="container">
+  <div class="card">
+    <h3 class="card-header">Verify Outcome</h3>
+    <div class="card-body">
+      <table class="table table-bordered table-default">
+        <thead class="table-danger">
+        <tr>
+          <th scope="col">Chapter</th>
+          <% @outcomeList = ['Remember','Understand','Apply','Analyze','Evaluate','Create'] %>
+          <% @outcomeList.each do |outlist| %>
+            <% @course.outcomes.each do |outcome| %>
+              <% if outcome.outcome == outlist  %>
+                <th scope="col"><%= outcome.outcome %></th>
+                <% break%>
+              <% else %>
+                <th scope="col"><%= outlist %></th>
+                <% break%>
+              <% end %>
+            <% end %>
+          <% end %>
+        </tr>
+        </thead>
+        <tbody>
+        <% @chapter_outcome.each do |co|%>
+          <% @ch_id = co.chapter_id %>
+          <% @ou_id = co.outcome_id %>
+        <%# end %>
+        <%# @course.chapters.each do |chapter| %>
+          <tr>
+            <% @chapters.where(id: @ch_id).each do |ch| %>
+              <th scope="row"><%= ch.name %></th>
+            <% end %>
+
+            <% @outcomes.where(id: @ou_id).each do |ou| %>
+              <% i = 0 %>
+              <% 6.times do %>
+
+                <% @check = @outcomeList[i] %>
+
+                <% if @check == ou.outcome %>
+                  <td scope="row"><%= ou.outcome %>
+                    <ul>
+                      <% @technique.where(outcome_id: @ou_id).each do |technique| %>
+                        <li><%= technique.name %></li>
+                      <% end %>
+                    </ul>
+                  </td>
+                <% else %>
+                  <td class="table-secondary">&nbsp;</td>
+                <% end %>
+
+
+
+              <% i = i + 1%>
+            <% end %>
+            <% end %>
+
+
+
+<!--            <th scope="row"><%#=chapter.name%></th>-->
+            <%# @outcomeList.each do |outlist| %>
+            <%# @course.outcomes.each do |outcome| %>
+                <%# if outcome.outcome == outlist  %>
+                  <%# @tech = outcome.id %>
+<!--                  <td><%#= outcome.outcome %>-->
+<!--                    <ul>-->
+                      <%# @technique.where(outcome_id: @tech).each do |technique| %>
+<!--                        <li><%#= technique.name %></li>-->
+                      <%# end %>
+<!--                    </ul>-->
+<!--                  </td>-->
+                  <%# break %>
+                <%# else %>
+<!--                  <td class="table-secondary">&nbsp;</td>-->
+                  <%# break %>
+                <%# end %>
+
+            <%# end %>
+            <%# end %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <%= form_for @course, url: wizard_path do |f| %>
+        <div class="form-group">
+          <%= f.hidden_field :course_id, value: @course.id %>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit "Submit" ,class:"btn btn-success" %>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>

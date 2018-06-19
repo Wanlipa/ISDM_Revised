@@ -1,10 +1,15 @@
 class CourseStepsController < ApplicationController
   skip_before_action :verify_authenticity_token
   include Wicked::Wizard
-  steps :about_course, :topics, :instructors, :course_meta, :objectives, :targets, :outcomes, :problems_solutions, :chapters, :evaluation
+  steps :about_course, :topics, :instructors, :course_meta, :objectives, :targets, :outcomes, :problems_solutions, :chapters, :evaluation, :verify
 
   def show
     @user = current_user
+    @course = Course.find(params[:course_id])
+    @technique = Technique.all
+    @chapter_outcome = ChapterOutcome.where(:course_id => @course.id)
+    @chapters = Chapter.all
+    @outcomes = Outcome.all
     if current_user.admin?
       flash[:error] = "Admin can edit at Admin Dashboard."
       redirect_to welcome_index_path
@@ -52,6 +57,13 @@ class CourseStepsController < ApplicationController
           end
         end
       end
+      # @chapter_outcome = ChapterOutcome.new(course_params)
+      # @chapter_outcome.save
+      #
+      # @chapter = Chapter.create(course_params)
+      # @outcome = Outcome.create(course_params)
+      #
+      # @chapter.chapter_outcome.create(@outcome)
       redirect_to wizard_path(steps.first, :course_id => @course.id)
     end
   end

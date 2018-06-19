@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180414182100) do
+ActiveRecord::Schema.define(version: 20180619072444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,18 @@ ActiveRecord::Schema.define(version: 20180414182100) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "chapter_outcomes", force: :cascade do |t|
+    t.bigint "course_id"
+    t.string "chname"
+    t.string "outcome"
+    t.bigint "chapter_id"
+    t.bigint "outcome_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chapter_id"], name: "index_chapter_outcomes_on_chapter_id"
+    t.index ["outcome_id"], name: "index_chapter_outcomes_on_outcome_id"
   end
 
   create_table "chapters", force: :cascade do |t|
@@ -171,6 +183,8 @@ ActiveRecord::Schema.define(version: 20180414182100) do
     t.index ["subtopic_id"], name: "index_uses_on_subtopic_id"
   end
 
+  add_foreign_key "chapter_outcomes", "chapters"
+  add_foreign_key "chapter_outcomes", "outcomes"
   add_foreign_key "chapters", "courses"
   add_foreign_key "courses", "categories"
   add_foreign_key "courses", "users"
