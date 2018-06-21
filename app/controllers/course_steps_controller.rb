@@ -6,10 +6,6 @@ class CourseStepsController < ApplicationController
   def show
     @user = current_user
     @course = Course.find(params[:course_id])
-    @technique = Technique.all
-    @chapter_outcome = ChapterOutcome.where(:course_id => @course.id)
-    @chapters = Chapter.all
-    @outcomes = Outcome.all
     if current_user.admin?
       flash[:error] = "Admin can edit at Admin Dashboard."
       redirect_to welcome_index_path
@@ -49,6 +45,7 @@ class CourseStepsController < ApplicationController
       end
       @course.chapters.build
       @course.chapters.each do |c|
+        c.chapter_outcomes.build
         c.maintopics.build
         c.maintopics.each do |m|
           m.subtopics.build
@@ -81,6 +78,7 @@ class CourseStepsController < ApplicationController
                                      objectives_attributes: [:id, :objective, :technique, :_destroy],
                                      problem_solutions_attributes: [:id, :problem, :solution, :_destroy],
                                      chapters_attributes: [:id, :name, :time, :_destroy,
+                                                           chapter_outcomes_attributes: [:id, :choutcome, :_destroy],
                                                            maintopics_attributes: [:id, :name, :_destroy,
                                                                                    subtopics_attributes: [:id, :name, :_destroy, material_ids: []]]])
     end

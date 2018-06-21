@@ -22,15 +22,11 @@ ActiveRecord::Schema.define(version: 20180619072444) do
   end
 
   create_table "chapter_outcomes", force: :cascade do |t|
-    t.bigint "course_id"
-    t.string "chname"
-    t.string "outcome"
+    t.string "choutcome"
     t.bigint "chapter_id"
-    t.bigint "outcome_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chapter_id"], name: "index_chapter_outcomes_on_chapter_id"
-    t.index ["outcome_id"], name: "index_chapter_outcomes_on_outcome_id"
   end
 
   create_table "chapters", force: :cascade do |t|
@@ -184,7 +180,6 @@ ActiveRecord::Schema.define(version: 20180619072444) do
   end
 
   add_foreign_key "chapter_outcomes", "chapters"
-  add_foreign_key "chapter_outcomes", "outcomes"
   add_foreign_key "chapters", "courses"
   add_foreign_key "courses", "categories"
   add_foreign_key "courses", "users"
