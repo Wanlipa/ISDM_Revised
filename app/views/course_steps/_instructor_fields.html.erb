@@ -1,15 +1,21 @@
 <div class="nested-fields">
   <div class="form-group", style="margin-bottom: 10px">
-    <%= f.label :instructor_name %>
-    <%= f.text_field :name, label: false, class: "form-control", placeholder: "Enter instructor name"%>
-    <%= f.label :instructor_picture %><br>
-    <div style="margin-bottom: 10px">
-      <%= image_tag(f.object.avatar.url, size: "150x150") if f.object.avatar? %>
+    <div class="row">
+      <div class="col-md-4"><%= f.text_field :name, label: false, class: "form-control", placeholder: "Enter instructor name"%></div>
+      <div class="col-md-4"><%= f.text_field :profile, label: false, class: "form-control", placeholder: "Enter instructor profile" %></div>
+      <div class="col-md-3">
+        <div style="margin-bottom: 10px">
+          <%= image_tag(f.object.avatar.url, size: "150x150") if f.object.avatar? %>
+        </div>
+        <div style="margin-bottom: 10px">
+          <%= f.file_field :avatar, class: "form-control-file" %>
+        </div>
+      </div>
+      <div class="col-md-1"><%= link_to_remove_association '<i class="fa fa-trash-o fa-2x text-danger"></i>'.html_safe, f%></div>
     </div>
-    <div style="margin-bottom: 10px">
-      <%= f.file_field :avatar, class: "form-control-file" %>
-    </div>
-    <%= link_to_remove_association "Remove instructor", f, class:"btn btn-danger"%>
+
+
+
     <hr style="height: 12px; border: 0; box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);" >
   </div>
 </div>

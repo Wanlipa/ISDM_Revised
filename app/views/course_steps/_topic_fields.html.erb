@@ -1,8 +1,9 @@
 <div class="nested-fields">
   <div class="field", style="margin-bottom: 10px">
-    <%= f.label :topic_name %>
-    <%= f.text_area :name, label: false, class: "form-control", placeholder: "Enter topic name"%>
-    <%= link_to_remove_association "Remove topic", f, class:"btn btn-danger"%>
+    <div class="row">
+      <div class="col-md-10"><%= f.text_area :name, label: false, class: "form-control", placeholder: "Enter topic name"%></div>
+      <div class="col-md-2"><%= link_to_remove_association '<i class="fa fa-trash-o fa-2x text-danger" style="margin-top: 15px;"></i>'.html_safe, f %></div>
+    </div>
     <hr style="height: 12px; border: 0; box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);" >
   </div>
 </div>

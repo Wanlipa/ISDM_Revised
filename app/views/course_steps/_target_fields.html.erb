@@ -1,16 +1,19 @@
 <div class="nested-fields">
   <div class="field", style="margin-bottom: 10px">
-    <%= f.label :target_learner %>
     <div style="margin-bottom: 10px">
-      <%= f.select :name, [['Pre-school','Pre-school'],
-                           ['Primary school','Primary school'],
-                           ['High school','High school'],
-                           ['Bachelors','Bachelors'],
-                           ['Masters','Masters'],
-                           ['Doctors','Doctors'],
-                           ['General','General']], {prompt: "Select target"}, {class: "form-control"} %>
+      <div class="row">
+        <div class="col-md-10">
+          <%= f.select :name, [['Pre-school','Pre-school'],
+                               ['Primary school','Primary school'],
+                               ['High school','High school'],
+                               ['Bachelors','Bachelors'],
+                               ['Masters','Masters'],
+                               ['Doctors','Doctors'],
+                               ['General','General']], {prompt: "Select target"}, {class: "form-control"} %>
+        </div>
+        <div class="col-md-2"><%= link_to_remove_association '<i class="fa fa-trash-o fa-2x text-danger"></i>'.html_safe, f%></div>
+      </div>
     </div>
-    <%= link_to_remove_association "Remove target", f, class:"btn btn-danger"%>
   </div>
   <hr style="height: 12px; border: 0; box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);">
 </div>

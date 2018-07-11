@@ -40,16 +40,22 @@
           <%= f.text_area :about_course, size: "30x5", class: "form-control", placeholder: "Enter course description"%>
         </div>
 
-        <div class="topics">
-          <%= f.label :topic %><br>
-          <%= f.fields_for :topics do |topic| %>
-            <%= render 'topic_fields', f: topic, class: "form-control" %>
-          <% end %>
+        <%= f.label :topic %><br>
+
+        <div class="card">
+          <div class="card-body">
+            <div class="topics">
+              <%= f.fields_for :topics do |topic| %>
+                <%= render 'topic_fields', f: topic, class: "form-control" %>
+              <% end %>
+            </div>
+
+            <div class="link">
+              <%= link_to_add_association '<i class="fa fa-plus-circle fa-2x"></i>'.html_safe, f, :topics %>
+            </div>
+          </div>
         </div>
 
-        <div class="link">
-          <%= link_to_add_association 'Add topic', f, :topics, class:"btn btn-primary" %>
-        </div>
 
         <div class="form-group">
           <%= f.hidden_field :course_id, value: @course.id %>

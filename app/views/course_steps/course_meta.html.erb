@@ -85,15 +85,20 @@
           <%= f.text_area :prerequisites, class: "form-control", placeholder: "Enter prerequisites" %>
         </div>
 
-        <div class="targets">
-          <%= f.fields_for :targets do |target| %>
-            <%= render 'target_fields', f: target, class: "form-control" %>
-          <% end %>
+        <%= f.label :target_learner %>
+        <div class="card">
+          <div class="card-body">
+            <div class="targets">
+              <%= f.fields_for :targets do |target| %>
+                <%= render 'target_fields', f: target, class: "form-control" %>
+              <% end %>
+            </div>
+            <div class="link">
+              <%= link_to_add_association '<i class="fa fa-plus-circle fa-2x"></i>'.html_safe, f, :targets %>
+            </div>
+          </div>
         </div>
 
-        <div class="link">
-          <%= link_to_add_association 'Add target learner', f, :targets, class:"btn btn-primary" %>
-        </div>
 
         <div class="form-group">
           <%= f.hidden_field :course_id, value: @course.id %>

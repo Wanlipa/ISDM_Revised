@@ -30,12 +30,15 @@
         <td><%= course.category.name %></td>
         <td>
           <% if user_signed_in? and current_user.admin? == false %>
-          <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, user_course_steps_path(current_user.id, :course_id => course.id) ,class: "btn btn-info btn-sm"%>
+          <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, user_course_steps_path(current_user.id, :course_id => course.id) ,class: "btn btn-info btn-sm",
+                      'data-toggle': 'tooltip', 'data-placement':'top', title: 'Edit'%>
           <%end %>
-          <%= link_to '<i class="fa fa-list"></i>'.html_safe, user_course_path(current_user.id, :id => course.id) ,class: "btn btn-warning btn-sm"%>
+          <%= link_to '<i class="fa fa-list"></i>'.html_safe, user_course_path(current_user.id, :id => course.id) ,class: "btn btn-warning btn-sm",
+                      'data-toggle': 'tooltip', 'data-placement':'top', title: 'Show'%>
           <%= link_to '<i class="fa fa-trash"></i>'.html_safe, [course.user, course],
                       method: :delete,
-                      data: { confirm: 'Are you sure?' } ,class: "btn btn-danger btn-sm"%>
+                      data: { confirm: 'Are you sure?' } ,class: "btn btn-danger btn-sm",
+                      'data-toggle': 'tooltip', 'data-placement':'top', title: 'Delete'%>
         </td>
       </tr>
 
