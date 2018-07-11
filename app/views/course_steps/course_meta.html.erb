@@ -5,17 +5,17 @@
                                       :data => {:confirm => 'Please make sure to insert course name, otherwise, course will not be saved.'},
                                       class: "page-link" %>
     </li>
-    <li class="page-item"><%= link_to 'Step 1', wizard_path(:about_course, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'About this Course'%></li>
-    <li class="page-item"><%= link_to 'Step 2', wizard_path(:topics, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Topics'%></li>
-    <li class="page-item"><%= link_to 'Step 3', wizard_path(:instructors, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Instructors'%></li>
-    <li class="page-item active"><%= link_to 'Step 4', wizard_path(:course_meta, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Course Metadata'%></li>
-    <li class="page-item"><%= link_to 'Step 5', wizard_path(:objectives, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Objectives'%></li>
-    <li class="page-item"><%= link_to 'Step 6', wizard_path(:targets, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Targets'%></li>
-    <li class="page-item"><%= link_to 'Step 7', wizard_path(:outcomes, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Outcomes'%></li>
-    <li class="page-item"><%= link_to 'Step 8', wizard_path(:problems_solutions, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Problems and Solutions'%></li>
-    <li class="page-item"><%= link_to 'Step 9', wizard_path(:chapters, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Chapter and Schedule'%></li>
-    <li class="page-item"><%= link_to 'Step 10', wizard_path(:evaluation, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Evaluation Technique'%></li>
-    <li class="page-item"><%= link_to 'Step 11', wizard_path(:verify, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Verify Outcome'%></li>
+    <li class="page-item"><%= link_to 'Step 1', wizard_path(:about_course, :course_id => @course.id), :method => :get, class: "page-link", 'data-toggle': 'tooltip', 'data-placement':'top', title: 'About this Course'%></li>
+    <!--        <li class="page-item"><%#= link_to 'Step 2', wizard_path(:topics, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Topics'%></li>-->
+    <li class="page-item"><%= link_to 'Step 2', wizard_path(:instructors, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Instructors'%></li>
+    <li class="page-item active"><%= link_to 'Step 3', wizard_path(:course_meta, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Course Metadata'%></li>
+    <li class="page-item"><%= link_to 'Step 4', wizard_path(:objectives, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Objectives'%></li>
+    <!--        <li class="page-item"><%#= link_to 'Step 6', wizard_path(:targets, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Targets'%></li>-->
+    <li class="page-item"><%= link_to 'Step 5', wizard_path(:outcomes, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Outcomes'%></li>
+    <!--        <li class="page-item"><%#= link_to 'Step 6', wizard_path(:problems_solutions, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Problems and Solutions'%></li>-->
+    <li class="page-item"><%= link_to 'Step 6', wizard_path(:evaluation, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Evaluation Technique'%></li>
+    <li class="page-item"><%= link_to 'Step 7', wizard_path(:chapters, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Chapter and Schedule'%></li>
+    <li class="page-item"><%= link_to 'Step 8', wizard_path(:verify, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Verify Outcome'%></li>
     <li class="page-item"><%= link_to 'Next Step', next_wizard_path(:course_id => @course.id), class: "page-link" %></li>
   </ul>
 </div>
@@ -83,6 +83,16 @@
         <div class="form-group">
           <%= f.label :prerequisites %>&nbsp<span style="color: #999999;">(ex. None, Familiarity with marketing and basic operations in Microsoft Excel preferred.)</span><br>
           <%= f.text_area :prerequisites, class: "form-control", placeholder: "Enter prerequisites" %>
+        </div>
+
+        <div class="targets">
+          <%= f.fields_for :targets do |target| %>
+            <%= render 'target_fields', f: target, class: "form-control" %>
+          <% end %>
+        </div>
+
+        <div class="link">
+          <%= link_to_add_association 'Add target learner', f, :targets, class:"btn btn-primary" %>
         </div>
 
         <div class="form-group">
