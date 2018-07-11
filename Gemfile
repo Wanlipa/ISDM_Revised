@@ -41,6 +41,14 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 
+# Octicons icon font
+gem 'octicons', '~> 7.4'
+gem 'octicons_helper', '~> 7.4'
+gem 'jekyll-octicons', '~> 7.4'
+
+# Font Awesome
+gem 'font-awesome-sass', '~> 5.0.13'
+
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks

@@ -5,7 +5,7 @@
                                           :data => {:confirm => 'Please make sure to insert course name, otherwise, course will not be saved.'},
                                           class: "page-link" %>
         </li>
-        <li class="page-item active"><%= link_to 'Step 1', wizard_path(:about_course, :course_id => @course.id), :method => :get, class: "page-link", 'data-toggle': 'tooltip', 'data-placement':'top', title: 'About this Course'%></li>
+        <li class="page-item active"><%= link_to 'Step 1', wizard_path(:about_course, :course_id => @course.id), :method => :get, class: "page-link", 'data-toggle': 'tooltip', 'data-placement':'top', title: 'About this Course' %></li>
 <!--        <li class="page-item"><%#= link_to 'Step 2', wizard_path(:topics, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Topics'%></li>-->
         <li class="page-item"><%= link_to 'Step 2', wizard_path(:instructors, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Instructors'%></li>
         <li class="page-item"><%= link_to 'Step 3', wizard_path(:course_meta, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Course Metadata'%></li>
@@ -41,6 +41,7 @@
         </div>
 
         <div class="topics">
+          <%= f.label :topic %><br>
           <%= f.fields_for :topics do |topic| %>
             <%= render 'topic_fields', f: topic, class: "form-control" %>
           <% end %>
