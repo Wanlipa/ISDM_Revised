@@ -17,7 +17,7 @@
   else
     link_to 'Online Course', welcome_index_path, class: "navbar-brand", id:"navbarColor02"
   end
-%><i class="fa fa-book" aria-hidden="true"></i>
+%><i class="fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -39,7 +39,7 @@
         <h4 id="login-username" class="text-light">Welcome <%= current_user.email %></h4>
       <% end %>
       <% if user_signed_in? %>
-      <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-danger btn-small navbar-btn" %>
+      <%= link_to '<i class="fa fa-power-off fa-2x text-danger"></i>'.html_safe, destroy_user_session_path, method: :delete, class: "navbar-btn" %>
       <% else %>
       <%= link_to "Register", new_user_registration_path, class: "btn btn-warning btn-small navbar-btn" ,style:"margin-right: 5px;"%>
       <%= link_to "Log in", new_user_session_path, class: "btn btn-primary btn-small navbar-btn" %>
