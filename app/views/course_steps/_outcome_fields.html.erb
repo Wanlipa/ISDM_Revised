@@ -1,23 +1,19 @@
 <div class="nested-fields">
   <div class="field", style="margin-bottom: 10px">
-    <%= f.label :outcome %>
-    <div style="margin-bottom: 10px">
-      <%= f.select :outcome, [['Remember', 'Remember'],
+      <div class="row">
+        <div class="col-md-5">
+          <%= f.text_field :learning, label: false, class: "form-control", placeholder: "Enter Learning Outcome"%></div>
+        <div class="col-md-5">
+          <%= f.select :outcome, [['Remember', 'Remember'],
                               ['Understand', 'Understand'],
                               ['Apply', 'Apply'],
                               ['Analyze', 'Analyze'],
                               ['Evaluate', 'Evaluate'],
-                              ['Create', 'Create']], {prompt: "Select learning outcome"}, {class: "form-control"} %>
+                              ['Create', 'Create']], {prompt: "Select Bloom's Taxonomy"}, {class: "form-control"} %>
+        </div>
+        <div class="col-md-2"><%= link_to_remove_association '<i class="fa fa-trash-o fa-2x text-danger"></i>'.html_safe, f %></div>
 
-      <%= f.fields_for :techniques do |technique| %>
-        <%= render 'technique_fields', f: technique, class: "form-control" %>
-      <% end %>
-    </div>
-    <div class="offset-lg-2">
-      <%= link_to_add_association 'Add technique', f, :techniques, class: "btn btn-primary" %>
-    </div>
-
-    <%= link_to_remove_association 'Remove outcome', f, class: "btn btn-danger" %>
     <hr style="height: 12px; border: 0; box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);">
   </div>
+</div>
 </div>

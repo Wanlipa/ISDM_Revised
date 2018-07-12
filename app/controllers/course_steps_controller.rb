@@ -39,10 +39,12 @@ class CourseStepsController < ApplicationController
     else
       @user = current_user
       @course = @user.courses.create(:category_id => 1)
+
       @course.outcomes.build
       @course.outcomes.each do |o|
         o.techniques.build
       end
+
       @course.chapters.build
       @course.chapters.each do |c|
         c.chapter_outcomes.build
@@ -54,6 +56,7 @@ class CourseStepsController < ApplicationController
           end
         end
       end
+
       # @chapter_outcome = ChapterOutcome.new(course_params)
       # @chapter_outcome.save
       #
@@ -71,9 +74,9 @@ class CourseStepsController < ApplicationController
                                      :effort, :price, :institution, :subject, :level, :languages, :evaluation,
                                      :videots, :prerequisites, :avatar, :status, :category_id,
                                      topics_attributes: [:id, :name, :_destroy],
-                                     instructors_attributes: [:id, :name, :avatar, :_destroy],
+                                     instructors_attributes: [:id, :name, :avatar, :profile, :_destroy],
                                      targets_attributes: [:id, :name, :_destroy],
-                                     outcomes_attributes: [:id, :outcome, :_destroy, techniques_attributes: [:id, :name, :_destroy]],
+                                     outcomes_attributes: [:id, :outcome, :learning, :_destroy, techniques_attributes: [:id, :name, :_destroy]],
                                      techniques_attributes: [:id, :name, :_destroy],
                                      objectives_attributes: [:id, :objective, :technique, :_destroy],
                                      problem_solutions_attributes: [:id, :problem, :solution, :_destroy],
