@@ -25,8 +25,14 @@
     <h3 class="card-header">Course instructor</h3>
       <div class="card-body">
         <div class="instructors">
+
+          <% i = 0 %>
           <%= f.fields_for :instructors do |instructor| %>
-            <%= render 'instructor_fields', f: instructor, class: "form-control" %>
+            <% i += 1 %>
+            <div class="row">
+              <div class="col-md-1"><%=i %></div>
+              <div class="col-md-11"><%= render 'instructor_fields', f: instructor, class: "form-control" %></div>
+            </div>
           <% end %>
         </div>
 

@@ -27,8 +27,13 @@
       <%= form_for @course, url: wizard_path do |f| %>
 
         <div class="objectives">
+          <% i = 0 %>
           <%= f.fields_for :objectives do |objective| %>
-            <%= render 'objective_fields', f: objective, class: "form-control" %>
+            <% i += 1 %>
+            <div class="row">
+              <div class="col-md-1"><%=i %></div>
+              <div class="col-md-11"><%= render 'objective_fields', f: objective, class: "form-control" %></div>
+            </div>
           <% end %>
         </div>
 

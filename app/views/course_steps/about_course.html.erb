@@ -24,6 +24,7 @@
   <div class="card">
   <h3 class="card-header">About this course</h3>
     <div class="card-body">
+
       <%= form_for @course, url: wizard_path do |f| %>
         <div class="form-group">
           <%= f.label :course_name%><br>
@@ -45,8 +46,16 @@
         <div class="card">
           <div class="card-body">
             <div class="topics">
+
+              <% i = 0 %>
               <%= f.fields_for :topics do |topic| %>
-                <%= render 'topic_fields', f: topic, class: "form-control" %>
+                <% i += 1 %>
+                <div class="row">
+                  <div class="col-md-1"><%=i %></div>
+                  <div class="col-md-11"><%= render 'topic_fields', f: topic, class: "form-control" %></div>
+                </div>
+
+
               <% end %>
             </div>
 

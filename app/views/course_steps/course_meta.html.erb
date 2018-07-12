@@ -89,8 +89,13 @@
         <div class="card">
           <div class="card-body">
             <div class="targets">
+              <% i = 0 %>
               <%= f.fields_for :targets do |target| %>
-                <%= render 'target_fields', f: target, class: "form-control" %>
+                <% i += 1 %>
+                <div class="row">
+                  <div class="col-md-1"><%=i %></div>
+                  <div class="col-md-11"><%= render 'target_fields', f: target, class: "form-control" %></div>
+                </div>
               <% end %>
             </div>
             <div class="link">
