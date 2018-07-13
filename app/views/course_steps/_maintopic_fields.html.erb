@@ -1,16 +1,18 @@
 <div class="nested-fields">
-  <div class="field offset-lg-2" , style="margin-bottom: 10px">
+  <div class="field offset-lg-1" , style="margin-bottom: 10px">
     <%= f.label :main_topic %>
-    <div style="margin-bottom: 10px">
-      <%= f.text_field :name, label: false, class: "form-control", placeholder: "Enter maintopic" %>
+    <div class = "row", style="margin-bottom: 10px">
+      <div class="col-md-11"><%= f.text_field :name, label: false, class: "form-control", placeholder: "Enter maintopic" %></div>
+      <div class="col-md-1"><%= link_to_remove_association '<i class="fa fa-trash-o fa-2x text-danger"></i>'.html_safe, f %></div>
+
 
       <%= f.fields_for :subtopics do |subtopic| %>
         <%= render 'subtopic_fields', f: subtopic, class: "form-control" %>
       <% end %>
     </div>
-    <div class="offset-lg-3">
+    <div class="offset-lg-1">
       <%= link_to_add_association 'Add sub topic', f, :subtopics, class: "btn btn-primary" %>
     </div>
-    <%= link_to_remove_association "Remove main topic", f, class: "btn btn-danger" %>
+
   </div>
 </div>

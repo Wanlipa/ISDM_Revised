@@ -25,20 +25,34 @@
     <h3 class="card-header">Verify Outcome</h3>
     <div class="card-body">
       <table class="table table-bordered table-default">
-        <thead class="table-danger">
+        <thead class="table-danger", style="text-align: center">
         <tr>
-          <th scope="col">Chapter</th>
-          <% @outcomeList = ['Remember','Understand','Apply','Analyze','Evaluate','Create'] %>
+          <th scope="col" , rowspan="2">Chapter</th>
+          <% @listC = Array.new %>
+          <% @listL = Array.new %>
+          <% @outcomeList = ['Remember','Understand','Apply','Analyze','Evaluate','Create']%>
           <% @outcomeList.each do |outlist| %>
-            <% @course.outcomes.each do |outcome| %>
-              <% if outcome.outcome == outlist  %>
-                <th scope="col"><%= outcome.outcome %></th>
-                <% break%>
-              <% else %>
-                <th scope="col"><%= outlist %></th>
-                <% break%>
+              <% countOut = @course.outcomes.where(outcome: outlist).all %>
+              <% count = countOut.count%>
+              <% @listC << count%>
+              <th scope="col", colspan=<%=count%>><%= outlist %></th>
+          <% end %>
+        </tr>
+        <tr>
+          <% i = 0%>
+          <% while i < 6  do %>
+            <% if @listC[i] != 0%>
+              <% @course.outcomes.each do |outcome| %>
+                <% if outcome.outcome == @outcomeList[i]  %>
+                  <th><%= outcome.learning %></th>
+                  <% @listL << outcome.learning%>
+                <% end %>
               <% end %>
-            <% end %>
+            <%else%>
+                  <th></th>
+              <% @listL << ""%>
+            <%end%>
+            <% i += 1%>
           <% end %>
         </tr>
         </thead>
@@ -48,11 +62,11 @@
               <td><%= chapter.name %></td>
               <% @chapter_outcomes = chapter.chapter_outcomes.select(:choutcome).distinct %>
 
-              <% @outcomeList.each do |outcome| %>
+              <% @listL.each do |learning| %>
                 <% @shouldprintno = false %>
                 <% @chapter_outcomes.each do |co| %>
-                  <% if co.choutcome == outcome %>
-                    <td>YES</td>
+                  <% if co.choutcome == learning %>
+                    <td><i class="fa fa-check fa-2x text-success"></i></td>
                     <% @shouldprintno = false %>
                     <% break %>
                   <% else %>
@@ -60,77 +74,15 @@
                   <% end %>
                 <% end %>
                 <% if @shouldprintno == true %>
-                  <td>NO</td>
+                  <td>&nbsp;</td>
                 <% end %>
               <% end %>
             </tr>
           <% end %>
         </tbody>
 
-
-
-<!--        <tbody>-->
-        <%# @chapter_outcome.each do |co|%>
-          <%# @ch_id = co.chapter_id %>
-          <%# @ou_id = co.outcome_id %>
-          <%# end %>
-          <%# @course.chapters.each do |chapter| %>
-<!--          <tr>-->
-            <%# @chapters.where(id: @ch_id).each do |ch| %>
-<!--              <th scope="row"><%#= ch.name %></th>-->
-            <%# end %>
-
-            <%# @outcomes.where(id: @ou_id).each do |ou| %>
-              <%# i = 0 %>
-              <%# 6.times do %>
-
-                <%# @check = @outcomeList[i] %>
-
-                <%# if @check == ou.outcome %>
-<!--                  <td scope="row"><%#= ou.outcome %>-->
-<!--                    <ul>-->
-                      <%# @technique.where(outcome_id: @ou_id).each do |technique| %>
-<!--                        <li><%#= technique.name %></li>-->
-                      <%# end %>
-<!--                    </ul>-->
-<!--                  </td>-->
-                <%# else %>
-<!--                  <td class="table-secondary">&nbsp;</td>-->
-                <%# end %>
-
-
-
-                <%# i = i + 1%>
-              <%# end %>
-            <%# end %>
-
-
-
-<!--            <!--            <th scope="row"><%##=chapter.name%></th>-->
-            <%# @outcomeList.each do |outlist| %>
-            <%# @course.outcomes.each do |outcome| %>
-            <%# if outcome.outcome == outlist  %>
-            <%# @tech = outcome.id %>
-<!--            <!--                  <td><%##= outcome.outcome %>-->
-<!--            <!--                    <ul>-->
-            <%# @technique.where(outcome_id: @tech).each do |technique| %>
-<!--            <!--                        <li><%##= technique.name %></li>-->
-            <%# end %>
-<!--            <!--                    </ul>-->
-<!--            <!--                  </td>-->
-            <%# break %>
-            <%# else %>
-<!--            <!--                  <td class="table-secondary">&nbsp;</td>-->
-            <%# break %>
-            <%# end %>
-
-            <%# end %>
-            <%# end %>
-<!--          </tr>-->
-        <%# end %>
-<!--        </tbody>-->
-
       </table>
+
 
       <%= form_for @course, url: wizard_path do |f| %>
         <div class="form-group">

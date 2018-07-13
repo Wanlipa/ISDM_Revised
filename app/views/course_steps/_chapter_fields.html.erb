@@ -1,11 +1,11 @@
 <div class="nested-fields">
   <div class="field", style="margin-bottom: 10px">
     <div class="row", style="margin-bottom: 10px">
-      <div class="col-lg-10">
+      <div class="col-sm-9">
         <%= f.label :chapter_name %>
         <%= f.text_field :name, label: false, class: "form-control", placeholder: "Enter chapter name" %>
       </div>
-      <div class="col-lg-2">
+      <div class="col-sm-2">
         <%= f.label :time %>
         <%= f.number_field :time,
                            :min => 0,
@@ -13,22 +13,26 @@
                            :onchange => "myFunction(true)", class: "form-control xr",
                            id: 'time' %>
       </div>
-    </div>
+      <div class="col-sm-1"><%= link_to_remove_association '<i class="fa fa-trash-o fa-2x text-danger" style="margin-top: 35px;"></i>'.html_safe, f%></div>
 
-    <%= f.fields_for :maintopics do |maintopic| %>
-      <%= render 'maintopic_fields', f: maintopic, class: "form-control" %>
-    <% end %>
+    </div>
 
     <%= f.fields_for :chapter_outcomes do |chapter_outcome| %>
       <%= render 'chapter_outcome_fields', f: chapter_outcome, class: "form-control" %>
     <% end %>
 
-    <div class="offset-lg-2">
+    <%= f.fields_for :maintopics do |maintopic| %>
+      <%= render 'maintopic_fields', f: maintopic, class: "form-control" %>
+    <% end %>
+
+
+
+    <div class="offset-lg-1">
       <%= link_to_add_association 'Add main topic', f, :maintopics, class: "btn btn-primary" %>
       <%= link_to_add_association 'Add chapter outcome', f, :chapter_outcomes, class: "btn btn-primary" %>
     </div>
-    <%= link_to_remove_association "Remove chapter", f, class:"btn btn-danger" %>
-    <hr style="height: 12px; border: 0; box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);">
+
+
   </div>
 </div>
 
