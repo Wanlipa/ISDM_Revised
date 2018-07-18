@@ -56,11 +56,30 @@
 
       <p>
         <strong>Instructors:</strong><br>
+        <div class="row">
         <% @course.instructors.each do |instructor| %>
-          <%= image_tag(instructor.avatar.url, size: "100x100", :style => "border-radius: 50%") if instructor.avatar.present? %>
-          <%= instructor.name %>
+
+          <div class="card col-md-3" style="width: 15rem; ">
+            <p style="text-align: center;"><%= image_tag(instructor.avatar.url, size: "100x100", :style => "border-radius: 50%") if instructor.avatar.present? %></p>
+            <div class="card-body">
+              <div class="card-text">
+                <h5><%= instructor.name %></h5>
+                <p><%= instructor.profile %></p>
+              </div>
+            </div>
+          </div>
+
         <% end %>
-        <br>
+      </div>
+      </p>
+
+      <p>
+        <strong>Target:</strong>
+      <ul>
+        <% @course.targets.each do |target| %>
+          <li><%= target.name %></li>
+        <% end %>
+      </ul>
       </p>
 
       <div class="row">
@@ -103,46 +122,46 @@
       </ul>
       </p>
 
-      <p>
-        <strong>Target:</strong>
-      <ul>
-        <% @course.targets.each do |target| %>
-          <li><%= target.name %></li>
-        <% end %>
-      </ul>
-      </p>
 
       <p>
         <strong>Outcome:</strong>
-      <ul>
-        <% @course.outcomes.each do |outcome| %>
-          <% @tech = outcome.id %>
-          <li><%= outcome.outcome %>
-            <ul>
-              <% @technique.where(outcome_id: @tech).each do |technique| %>
-                <li><%= technique.name %></li>
-              <% end %>
-            </ul>
-          </li>
-        <% end %>
-      </ul>
       </p>
 
-      <p>
-        <strong>Problems & Solutions:</strong>
-      <div class="list-group">
-        <div class="row">
-        <% @course.problem_solutions.each do |ps| %>
-            <div class="col-sm-6 list-group-item" >
-              <%= ps.problem %>
-            </div>
-            <div class="col-sm-6 list-group-item">
-              <%= ps.solution%>
-            </div>
+      <table class="table table-hover">
+        <thead class="thead-dark" style="text-align: center">
+        <th>#</th>
+        <th>Outcome</th>
+        <th>Learning Outcome</th>
+        </thead>
+
+        <tbody>
+        <% i = 1 %>
+        <% @course.outcomes.each do |outcome| %>
+          <tr>
+            <td style="text-align: center;"><%=i %></td>
+            <td><%= outcome.outcome %></td>
+            <td><%= outcome.learning %></td>
+          </tr>
+        <% i += 1 %>
         <% end %>
-        </div>
-      </div>
-      </p>
+        </tbody>
+      </table>
+
+<!--      <p>-->
+<!--        <strong>Problems & Solutions:</strong>-->
+<!--      <div class="list-group">-->
+<!--        <div class="row">-->
+        <%# @course.problem_solutions.each do |ps| %>
+<!--            <div class="col-sm-6 list-group-item" >-->
+              <%#= ps.problem %>
+<!--            </div>-->
+<!--            <div class="col-sm-6 list-group-item">-->
+              <%#= ps.solution%>
+<!--            </div>-->
+        <%# end %>
+<!--        </div>-->
+<!--      </div>-->
+<!--      </p>-->
 
 
       <div class="card bg-info text-white">
@@ -151,36 +170,53 @@
       <br>
 
       <p>
+        <strong>Evaluation:</strong>
+        <%= @course.evaluation %>
+      </p>
+
+      <p>
         <strong>Chapter & Schedule:</strong>
       <table class="table table-hover">
         <thead class="thead-dark" style="text-align: center">
         <th>Length(Minutes)</th>
-        <th>Chapter Information</th>
+        <th>Chapter</th>
+        <th>Main Topic</th>
+        <th>Sub Topic</th>
+        <th>Activities</th>
         </thead>
         <tbody>
         <% @course.chapters.each do |chapter| %>
           <tr>
             <td style="text-align: center"><%= chapter.time %></td>
-            <td><%= chapter.name %>
-            <ul>
+            <td><%= chapter.name %></td>
+            <td>
+
                 <% @maintopic.where(chapter_id: chapter.id).each do |maintopic| %>
-                <li><%= maintopic.name %>
+                <%= maintopic.name %>
+                  <td>
                   <ul>
                     <% @subtopic.where(maintopic_id: maintopic.id).each do |subtopic| %>
                       <li><%= subtopic.name %>
-                        <ul>
-                          <% @use.where(subtopic_id: subtopic.id).each do |use| %>
-                            <% @material = Material.find(use.material_id)%>
-                            <li><%= @material.name %>
-                            </li>
-                          <% end %>
-                        </ul>
+
+                          <ul>
+                            <% @use.where(subtopic_id: subtopic.id).each do |use| %>
+
+                              <% @material = Material.find(use.material_id)%>
+                              <li><%= @material.name %>
+                              </li>
+
+                            <% end %>
+                          </ul>
+
                       </li>
                     <% end %>
                   </ul>
-                </li>
+              </td>
+
                 <% end %>
-            </ul>
+
+
+
             </td>
           </tr>
         <% end %>
@@ -189,15 +225,16 @@
       </p>
 
       <p>
-        <strong>Evaluation:</strong>
-        <%= @course.evaluation %>
+        <strong>Verify:</strong>
+
       </p>
 
     </div>
 
   </div>
 
-  <a id="back-to-top" href="#" class="btn btn-primary btn-sm back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left">Go Up</a>
+  <a id="back-to-top" href="#" class="btn btn-primary btn-sm back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left">
+    <i class="fa fa-arrow-up" aria-hidden="true"></i></a>
 </div>
 
 
