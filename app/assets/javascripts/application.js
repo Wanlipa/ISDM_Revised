@@ -38,5 +38,15 @@ $(document).ready(function(){
 
     $('#back-to-top').tooltip('show');
 
+    //TOGGLE FONT AWESOME ON CLICK
+    $('.faq-links').click(function(){
+        var collapsed=$(this).find('i').hasClass('fa-angle-up');
+
+        $('.faq-links').find('i').removeClass('fa-angle-down');
+
+        $('.faq-links').find('i').addClass('fa-angle-up');
+        if(collapsed)
+            $(this).find('i').toggleClass('fa-angle-up fa-2x fa-angle-down fa-2x')
+    });
 });
 
