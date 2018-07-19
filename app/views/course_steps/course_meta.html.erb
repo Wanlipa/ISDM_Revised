@@ -15,7 +15,8 @@
     <!--        <li class="page-item"><%#= link_to 'Step 6', wizard_path(:problems_solutions, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Problems and Solutions'%></li>-->
     <li class="page-item"><%= link_to 'Step 6', wizard_path(:evaluation, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Evaluation Technique'%></li>
     <li class="page-item"><%= link_to 'Step 7', wizard_path(:chapters, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Chapter and Schedule'%></li>
-    <li class="page-item"><%= link_to 'Step 8', wizard_path(:verify, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Verify Outcome'%></li>
+    <li class="page-item"><%= link_to 'Step 8', wizard_path(:match, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Match Chapter and Outcome'%></li>
+    <li class="page-item"><%= link_to 'Step 9', wizard_path(:verify, :course_id => @course.id), :method => :get, class: "page-link" , 'data-toggle': 'tooltip', 'data-placement':'top', title: 'Verify Outcome'%></li>
     <li class="page-item"><%= link_to 'Next Step', next_wizard_path(:course_id => @course.id), class: "page-link" %></li>
   </ul>
 </div>
@@ -96,6 +97,7 @@
                   <div class="col-md-1"><%=i %></div>
                   <div class="col-md-11"><%= render 'target_fields', f: target, class: "form-control" %></div>
                 </div>
+<!--                <hr style="height: 12px; border: 0; box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);">-->
               <% end %>
             </div>
             <div class="link">

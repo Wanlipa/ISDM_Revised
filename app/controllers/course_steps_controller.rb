@@ -1,7 +1,7 @@
 class CourseStepsController < ApplicationController
   skip_before_action :verify_authenticity_token
   include Wicked::Wizard
-  steps :about_course, :instructors, :course_meta, :objectives, :outcomes, :evaluation, :chapters, :verify
+  steps :about_course, :instructors, :course_meta, :objectives, :outcomes, :evaluation, :chapters, :match, :verify
 
   def show
     @user = current_user

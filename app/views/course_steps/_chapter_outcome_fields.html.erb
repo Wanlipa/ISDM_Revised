@@ -1,6 +1,6 @@
 <div class="nested-fields">
   <div class="field offset-sm-1" , style="margin-bottom: 10px">
-    <%= f.label :chapter_outcome %>
+    <%= f.label :learning_outcome %>
     <div style="margin-bottom: 10px">
       <div class="row">
         <div class="col-sm-11"><%= f.select( :choutcome, @course.outcomes.all.map {|u| [u.learning,u.learning]},{prompt: "Select learning outcome"}, {class: "form-control"}) %></div>

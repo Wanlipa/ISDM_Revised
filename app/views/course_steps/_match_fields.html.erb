@@ -1,0 +1,24 @@
+<div class="nested-fields">
+  <div class="field", style="margin-bottom: 10px">
+    <div class="row", style="margin-bottom: 10px">
+
+        <%= f.label :chapter_name %>
+        <div class="col-sm-11"><%= f.select( :name, @course.chapters.all.map {|u| [u.name,u.name]},{prompt: "Select Chapter"}, {class: "form-control"}) %></div>
+
+
+    </div>
+
+    <%= f.fields_for :chapter_outcomes do |chapter_outcome| %>
+      <%= render 'chapter_outcome_fields', f: chapter_outcome, class: "form-control" %>
+    <% end %>
+
+
+
+
+    <div class="offset-lg-1">
+      <%= link_to_add_association '<i class="fa fa-plus "> Learning Outcome</i>'.html_safe, f, :chapter_outcomes, class: "btn btn-outline-primary" %>
+    </div>
+
+
+  </div>
+</div>

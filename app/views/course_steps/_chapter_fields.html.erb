@@ -2,7 +2,7 @@
   <div class="field", style="margin-bottom: 10px">
     <div class="row", style="margin-bottom: 10px">
       <div class="col-sm-9">
-        <%= f.label :chapter_name %>
+        <%= f.label :chapter_name ,class: "text-success"%>
         <%= f.text_field :name, label: false, class: "form-control", placeholder: "Enter chapter name" %>
       </div>
       <div class="col-sm-2">
@@ -17,10 +17,6 @@
 
     </div>
 
-    <%= f.fields_for :chapter_outcomes do |chapter_outcome| %>
-      <%= render 'chapter_outcome_fields', f: chapter_outcome, class: "form-control" %>
-    <% end %>
-
     <%= f.fields_for :maintopics do |maintopic| %>
       <%= render 'maintopic_fields', f: maintopic, class: "form-control" %>
     <% end %>
@@ -28,8 +24,7 @@
 
 
     <div class="offset-lg-1">
-      <%= link_to_add_association 'Add main topic', f, :maintopics, class: "btn btn-primary" %>
-      <%= link_to_add_association 'Add chapter outcome', f, :chapter_outcomes, class: "btn btn-primary" %>
+      <%= link_to_add_association '<i class="fa fa-plus "> Main topic</i>'.html_safe, f, :maintopics, class: "btn btn-outline-info" %>
     </div>
 
 
