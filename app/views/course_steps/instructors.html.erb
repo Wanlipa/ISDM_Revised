@@ -23,7 +23,15 @@
 <div class="container">
   <div class="card">
   <%= form_for @course, url: wizard_path do |f| %>
-    <h3 class="card-header">Course instructor</h3>
+      <div class="card-header" id="headingOne">
+        <h3 class="faq-links">Course instructor <i class="fa fa-angle-up" class="btn btn-link " data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></i></h3>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="card-body">
+            more detail...
+          </div>
+        </div>
+      </div>
+
       <div class="card-body">
         <div class="instructors">
 
@@ -34,7 +42,7 @@
               <div class="col-md-1"><%=i %></div>
               <div class="col-md-11"><%= render 'instructor_fields', f: instructor, class: "form-control" %></div>
             </div>
-            <hr style="height: 12px; border: 0; box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);" >
+
           <% end %>
         </div>
 
@@ -52,5 +60,7 @@
         </div>
       <% end %>
     </div>
+
+
   </div>
 </div>

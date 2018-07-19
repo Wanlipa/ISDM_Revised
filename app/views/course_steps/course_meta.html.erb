@@ -22,10 +22,18 @@
 </div>
 <div class="container">
   <div class="card">
-  <%= form_for @course, url: wizard_path do |f| %>
-    <h3 class="card-header">Course metadata</h3>
-      <div class="card-body">
 
+      <div class="card-header" id="headingOne">
+        <h3 class="faq-links">Course metadata <i class="fa fa-angle-up" class="btn btn-link " data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></i></h3>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="card-body">
+            more detail...
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <%= form_for @course, url: wizard_path do |f| %>
         <div class="form-group">
           <%= f.label "length (minutes)" %><br>
           <%= f.number_field :length, min: 1, max: 1000, step: 1 %>

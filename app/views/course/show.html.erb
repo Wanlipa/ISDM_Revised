@@ -56,9 +56,9 @@
 
       <p>
         <strong>Instructors:</strong><br>
+
         <div class="row">
         <% @course.instructors.each do |instructor| %>
-
           <div class="card col-md-3" style="width: 15rem; ">
             <p style="text-align: center;"><%= image_tag(instructor.avatar.url, size: "100x100", :style => "border-radius: 50%") if instructor.avatar.present? %></p>
             <div class="card-body">
@@ -128,7 +128,7 @@
       </p>
 
       <table class="table table-hover">
-        <thead class="thead-dark" style="text-align: center">
+        <thead class="table-warning" style="text-align: center">
         <th>#</th>
         <th>Outcome</th>
         <th>Learning Outcome</th>
@@ -177,12 +177,24 @@
       <p>
         <strong>Chapter & Schedule:</strong>
       <table class="table table-hover">
-        <thead class="thead-dark" style="text-align: center">
-        <th>Length(Minutes)</th>
-        <th>Chapter</th>
-        <th>Main Topic</th>
-        <th>Sub Topic</th>
-        <th>Activities</th>
+        <thead class="table-success" style="text-align: center">
+        <tr>
+          <th>Length</th>
+          <th>Chapter</th>
+          <th>Main Topic</th>
+          <th>Sub Topic</th>
+          <th colspan="4">Activities</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>Power Point</th>
+          <th>PDF sheets</th>
+          <th>Question Practices</th>
+          <th>Video</th>
+        </tr>
         </thead>
         <tbody>
         <% @course.chapters.each do |chapter| %>
@@ -190,13 +202,13 @@
             <td style="text-align: center"><%= chapter.time %></td>
             <td><%= chapter.name %></td>
             <td>
+              <% @maintopic.where(chapter_id: chapter.id).each do |maintopic| %>
 
-                <% @maintopic.where(chapter_id: chapter.id).each do |maintopic| %>
-                <%= maintopic.name %>
-                  <td>
-                  <ul>
-                    <% @subtopic.where(maintopic_id: maintopic.id).each do |subtopic| %>
-                      <li><%= subtopic.name %>
+                  <%= maintopic.name %>
+
+            <td>
+              <% @subtopic.where(maintopic_id: maintopic.id).each do |subtopic| %>
+                <%= subtopic.name %>
 
                           <ul>
                             <% @use.where(subtopic_id: subtopic.id).each do |use| %>
@@ -208,16 +220,16 @@
                             <% end %>
                           </ul>
 
-                      </li>
+
                     <% end %>
-                  </ul>
+
               </td>
+                </td>
 
-                <% end %>
+        <% end %>
 
 
 
-            </td>
           </tr>
         <% end %>
         </tbody>
@@ -226,7 +238,64 @@
 
       <p>
         <strong>Verify:</strong>
+  <table class="table table-bordered table-default">
+    <thead class="table-danger", style="text-align: center">
+    <tr>
+      <th scope="col" , rowspan="2">Chapter</th>
+      <% @listC = Array.new %>
+      <% @listL = Array.new %>
+      <% @outcomeList = ['Remember','Understand','Apply','Analyze','Evaluate','Create']%>
+      <% @outcomeList.each do |outlist| %>
+        <% countOut = @course.outcomes.where(outcome: outlist).all %>
+        <% count = countOut.count%>
+        <% @listC << count%>
+        <th scope="col", colspan=<%=count%>><%= outlist %></th>
+      <% end %>
+    </tr>
+    <tr>
+      <% i = 0%>
+      <% while i < 6  do %>
+        <% if @listC[i] != 0%>
+          <% @course.outcomes.each do |outcome| %>
+            <% if outcome.outcome == @outcomeList[i]  %>
+              <th><%= outcome.learning %></th>
+              <% @listL << outcome.learning%>
+            <% end %>
+          <% end %>
+        <%else%>
+          <th></th>
+          <% @listL << ""%>
+        <%end%>
+        <% i += 1%>
+      <% end %>
+    </tr>
+    </thead>
+    <tbody , style="text-align: center">
+    <% @course.chapters.each do |chapter| %>
+      <tr>
+        <td><%= chapter.name %></td>
+        <% @chapter_outcomes = chapter.chapter_outcomes.select(:choutcome).distinct %>
 
+        <% @listL.each do |learning| %>
+          <% @shouldprintno = false %>
+          <% @chapter_outcomes.each do |co| %>
+            <% if co.choutcome == learning %>
+              <td><i class="fa fa-check fa-2x text-success"></i></td>
+              <% @shouldprintno = false %>
+              <% break %>
+            <% else %>
+              <% @shouldprintno = true %>
+            <% end %>
+          <% end %>
+          <% if @shouldprintno == true %>
+            <td>&nbsp;</td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+
+  </table>
       </p>
 
     </div>
