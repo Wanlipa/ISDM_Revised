@@ -176,10 +176,10 @@
 
       <p>
         <strong>Chapter & Schedule:</strong>
-      <table class="table table-hover">
+      <table class="table table-hover table-bordered">
         <thead class="table-success" style="text-align: center">
         <tr>
-          <th>Length</th>
+          <th>Minute</th>
           <th>Chapter</th>
           <th>Main Topic</th>
           <th>Sub Topic</th>
@@ -197,41 +197,73 @@
         </tr>
         </thead>
         <tbody>
+
+
+
+        <% @matL = ['Power Point','PDF sheets','Question Practices','Video']%>
         <% @course.chapters.each do |chapter| %>
           <tr>
             <td style="text-align: center"><%= chapter.time %></td>
             <td><%= chapter.name %></td>
-            <td>
+
+            <% countMain = @maintopic.where(chapter_id: chapter.id).all %>
+            <% countM = countMain.count%>
+            <% k = countM %>
               <% @maintopic.where(chapter_id: chapter.id).each do |maintopic| %>
 
-                  <%= maintopic.name %>
+              <% if k < countM%>
+              <tr>
+                <td></td>
+                <td></td>
+              <% end %>
+              <td><%= maintopic.name %></td>
 
-            <td>
+            <% l = 0 %>
               <% @subtopic.where(maintopic_id: maintopic.id).each do |subtopic| %>
-                <%= subtopic.name %>
+              <% if l >= 1 %>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              <% end %>
+                <td><%= subtopic.name %></td>
 
-                          <ul>
-                            <% @use.where(subtopic_id: subtopic.id).each do |use| %>
-
-                              <% @material = Material.find(use.material_id)%>
-                              <li><%= @material.name %>
-                              </li>
-
-                            <% end %>
-                          </ul>
-
-
+                <% @matL.each do |matl|%>
+                  <% @shouldprintno = false %>
+                  <% @use.where(subtopic_id: subtopic.id).each do |use| %>
+                    <% @material = Material.find(use.material_id)%>
+                    <% if @material.name == matl%>
+                      <td style="text-align: center"><i class="fa fa-check fa-2x text-success"></i></td>
+                      <% @shouldprintno = false %>
+                      <% break %>
+                    <% else %>
+                      <% @shouldprintno = true %>
                     <% end %>
 
-              </td>
-                </td>
+                  <% end %>
+                  <% if @shouldprintno == true %>
+                    <td>&nbsp;</td>
+                  <% end %>
+                <% end %>
+                <!--end loop material-->
 
-        <% end %>
+              <% if l >= 1%>
+                </tr>
+              <% end %>
+              <% l += 1 %>
+              <% end %>
+              <!--end loop sub topic-->
 
+            <% if k < countM%>
+              </tr>
+            <% end %>
 
-
+              <% k -= 1 %>
+              <% end %>
+              <!--end loop main topic-->
           </tr>
         <% end %>
+        <!--end loop chapter-->
         </tbody>
       </table>
       </p>
@@ -270,7 +302,7 @@
       <% end %>
     </tr>
     </thead>
-    <tbody , style="text-align: center">
+    <tbody>
     <% @course.chapters.each do |chapter| %>
       <tr>
         <td><%= chapter.name %></td>
@@ -280,7 +312,7 @@
           <% @shouldprintno = false %>
           <% @chapter_outcomes.each do |co| %>
             <% if co.choutcome == learning %>
-              <td><i class="fa fa-check fa-2x text-success"></i></td>
+              <td style="text-align: center"><i class="fa fa-check fa-2x text-success"></i></td>
               <% @shouldprintno = false %>
               <% break %>
             <% else %>

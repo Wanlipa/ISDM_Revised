@@ -65,7 +65,7 @@
           <% end %>
         </tr>
         </thead>
-        <tbody , style="text-align: center">
+        <tbody>
           <% @course.chapters.each do |chapter| %>
             <tr>
               <td><%= chapter.name %></td>
@@ -75,7 +75,7 @@
                 <% @shouldprintno = false %>
                 <% @chapter_outcomes.each do |co| %>
                   <% if co.choutcome == learning %>
-                    <td><i class="fa fa-check fa-2x text-success"></i></td>
+                    <td style="text-align: center"><i class="fa fa-check fa-2x text-success"></i></td>
                     <% @shouldprintno = false %>
                     <% break %>
                   <% else %>
