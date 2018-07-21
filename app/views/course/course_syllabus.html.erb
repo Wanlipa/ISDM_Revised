@@ -34,7 +34,8 @@
       <strong>Instructors:</strong><br>
       <% @course.instructors.each do |instructor| %>
         <%= image_tag(instructor.avatar.current_path, size: "100x100", :style => "border-radius: 50%") if instructor.avatar.present? %>
-        <%= instructor.name %>
+        <strong><%= instructor.name %></strong>
+        <%= instructor.profile %>
       <% end %>
       <br>
     </p>

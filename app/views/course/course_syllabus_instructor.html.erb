@@ -34,7 +34,8 @@
       <strong>Instructors:</strong><br>
       <% @course.instructors.each do |instructor| %>
         <%= image_tag(instructor.avatar.current_path, size: "100x100", :style => "border-radius: 50%") if instructor.avatar.present? %>
-        <%= instructor.name %>
+        <strong><%= instructor.name %></strong>
+        <%= instructor.profile %>
       <% end %>
       <br>
     </p>
@@ -79,6 +80,15 @@
       <%= @course.prerequisites %>
     </p>
 
+    <p>
+      <strong>Target:</strong>
+    <ul>
+      <% @course.targets.each do |target| %>
+        <li><%= target.name %></li>
+      <% end %>
+    </ul>
+    </p>
+
     <hr>
 
       <h3 style="text-align: center">Phase 2: Analysis Phase</h3>
@@ -92,46 +102,46 @@
     </ul>
     </p>
 
-    <p>
-      <strong>Target:</strong>
-    <ul>
-      <% @course.targets.each do |target| %>
-        <li><%= target.name %></li>
-      <% end %>
-    </ul>
-    </p>
+
 
     <p>
       <strong>Outcome:</strong>
-    <ul>
+    <table border="5" bordercolor = "black" width="100%">
+      <thead bgcolor="#F9E79F">
+      <th>#</th>
+      <th>Outcome</th>
+      <th>Learning Outcome</th>
+      </thead>
+
+      <tbody>
+      <% i = 1 %>
       <% @course.outcomes.each do |outcome| %>
-        <% @tech = outcome.id %>
-        <li><%= outcome.outcome %>
-          <ul>
-            <% @technique.where(outcome_id: @tech).each do |technique| %>
-              <li><%= technique.name %></li>
-            <% end %>
-          </ul>
-        </li>
+        <tr>
+          <td style="text-align: center;"><%=i %></td>
+          <td><%= outcome.outcome %></td>
+          <td><%= outcome.learning %></td>
+        </tr>
+        <% i += 1 %>
       <% end %>
-    </ul>
+      </tbody>
+    </table>
     </p>
 
-    <p>
-      <strong>Problems & Solutions:</strong>
-    <div class="list-group">
-      <div class="row">
-        <% @course.problem_solutions.each do |ps| %>
-          <div class="col-sm-6 list-group-item" >
-            <%= ps.problem %> :
-          </div>
-          <div class="col-sm-6 list-group-item">
-            <%= ps.solution%>
-          </div>
-        <% end %>
-      </div>
-    </div>
-    </p>
+<!--    <p>-->
+<!--      <strong>Problems & Solutions:</strong>-->
+<!--    <div class="list-group">-->
+<!--      <div class="row">-->
+        <%# @course.problem_solutions.each do |ps| %>
+<!--          <div class="col-sm-6 list-group-item" >-->
+<!--            <%#= ps.problem %> :-->
+<!--          </div>-->
+<!--          <div class="col-sm-6 list-group-item">-->
+            <%#= ps.solution%>
+<!--          </div>-->
+        <%# end %>
+<!--      </div>-->
+<!--    </div>-->
+<!--    </p>-->
 
 
     <hr>
@@ -140,47 +150,165 @@
     <br>
 
     <p>
+      <strong>Evaluation:</strong>
+      <%= @course.evaluation %>
+    </p>
+
+    <p>
       <strong>Chapter & Schedule:</strong>
 
     <table border="5" bordercolor = "black" width="100%">
+      <thead bgcolor="#96FF8A">
+      <tr>
+        <th>Minute</th>
+        <th>Chapter</th>
+        <th>Main Topic</th>
+        <th>Sub Topic</th>
+        <th colspan="4">Activities</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>Power Point</th>
+        <th>PDF sheets</th>
+        <th>Question Practices</th>
+        <th>Video</th>
+      </tr>
+      </thead>
+      <tbody>
 
-      <th>Length(Minutes)</th>
-      <th>Chapter Information</th>
-
+      <% @matL = ['Power Point','PDF sheets','Question Practices','Video']%>
       <% @course.chapters.each do |chapter| %>
         <tr>
           <td style="text-align: center"><%= chapter.time %></td>
-          <td><%= chapter.name %>
-            <ul>
-              <% @maintopic.where(chapter_id: chapter.id).each do |maintopic| %>
-                <li><%= maintopic.name %>
-                  <ul>
-                    <% @subtopic.where(maintopic_id: maintopic.id).each do |subtopic| %>
-                      <li><%= subtopic.name %>
-                        <ul>
-                          <% @use.where(subtopic_id: subtopic.id).each do |use| %>
-                            <% @material = Material.find(use.material_id) %>
-                            <li><%= @material.name %>
-                            </li>
-                          <% end %>
-                        </ul>
-                      </li>
-                    <% end %>
-                  </ul>
-                </li>
+          <td><%= chapter.name %></td>
+
+          <% countMain = @maintopic.where(chapter_id: chapter.id).all %>
+          <% countM = countMain.count%>
+          <% k = countM %>
+          <% @maintopic.where(chapter_id: chapter.id).each do |maintopic| %>
+
+            <% if k < countM%>
+            <tr>
+              <td></td>
+              <td></td>
+          <% end %>
+          <td><%= maintopic.name %></td>
+
+          <% l = 0 %>
+          <% @subtopic.where(maintopic_id: maintopic.id).each do |subtopic| %>
+            <% if l >= 1 %>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            <% end %>
+            <td><%= subtopic.name %></td>
+
+            <% @matL.each do |matl|%>
+              <% @shouldprintno = false %>
+              <% @use.where(subtopic_id: subtopic.id).each do |use| %>
+                <% @material = Material.find(use.material_id)%>
+                <% if @material.name == matl%>
+                  <td style="text-align: center"> / </td>
+                  <% @shouldprintno = false %>
+                  <% break %>
+                <% else %>
+                  <% @shouldprintno = true %>
+                <% end %>
+
               <% end %>
-            </ul>
-          </td>
+              <% if @shouldprintno == true %>
+                <td>&nbsp;</td>
+              <% end %>
+            <% end %>
+            <!--end loop material-->
+
+            <% if l >= 1%>
+              </tr>
+            <% end %>
+            <% l += 1 %>
+          <% end %>
+          <!--end loop sub topic-->
+
+          <% if k < countM%>
+            </tr>
+          <% end %>
+
+          <% k -= 1 %>
+        <% end %>
+        <!--end loop main topic-->
         </tr>
       <% end %>
-
+      <!--end loop chapter-->
+      </tbody>
     </table>
     </p>
 
     <p>
-      <strong>Evaluation:</strong>
-      <%= @course.evaluation %>
+      <strong>Verify:</strong>
+    <table border="5" bordercolor = "black" width="100%">
+      <thead bgcolor="#FDBCD5">
+      <tr>
+        <th scope="col" , rowspan="2">Chapter</th>
+        <% @listC = Array.new %>
+        <% @listL = Array.new %>
+        <% @outcomeList = ['Remember','Understand','Apply','Analyze','Evaluate','Create']%>
+        <% @outcomeList.each do |outlist| %>
+          <% countOut = @course.outcomes.where(outcome: outlist).all %>
+          <% count = countOut.count%>
+          <% @listC << count%>
+          <th scope="col", colspan=<%=count%>><%= outlist %></th>
+        <% end %>
+      </tr>
+      <tr>
+        <% i = 0%>
+        <% while i < 6  do %>
+          <% if @listC[i] != 0%>
+            <% @course.outcomes.each do |outcome| %>
+              <% if outcome.outcome == @outcomeList[i]  %>
+                <th><%= outcome.learning %></th>
+                <% @listL << outcome.learning%>
+              <% end %>
+            <% end %>
+          <%else%>
+            <th></th>
+            <% @listL << ""%>
+          <%end%>
+          <% i += 1%>
+        <% end %>
+      </tr>
+      </thead>
+      <tbody>
+      <% @course.chapters.each do |chapter| %>
+        <tr>
+          <td><%= chapter.name %></td>
+          <% @chapter_outcomes = chapter.chapter_outcomes.select(:choutcome).distinct %>
+
+          <% @listL.each do |learning| %>
+            <% @shouldprintno = false %>
+            <% @chapter_outcomes.each do |co| %>
+              <% if co.choutcome == learning %>
+                <td style="text-align: center"> / </td>
+                <% @shouldprintno = false %>
+                <% break %>
+              <% else %>
+                <% @shouldprintno = true %>
+              <% end %>
+            <% end %>
+            <% if @shouldprintno == true %>
+              <td>&nbsp;</td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+
+    </table>
     </p>
+
   </div>
 </div>
 
