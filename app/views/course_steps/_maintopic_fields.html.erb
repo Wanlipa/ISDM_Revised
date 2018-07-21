@@ -1,8 +1,8 @@
 <div class="nested-fields">
   <div class="field offset-lg-1" , style="margin-bottom: 10px">
-    <%= f.label :main_topic , class: "text-info"%>
+    <%= f.label :main_topic , class: "text-info"%><span class="text-info"> / หัวข้อหลัก</span>
     <div class = "row", style="margin-bottom: 10px">
-      <div class="col-md-11"><%= f.text_field :name, label: false, class: "form-control", placeholder: "Enter maintopic" %></div>
+      <div class="col-md-11"><%= f.text_field :name, label: false, class: "form-control", placeholder: "Enter maintopic / ระบุหัวข้อหลัก" %></div>
       <div class="col-md-1"><%= link_to_remove_association '<i class="fa fa-trash-o fa-2x text-danger"></i>'.html_safe, f %></div>
 
 

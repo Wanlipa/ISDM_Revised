@@ -2,14 +2,14 @@
   <div class="field", style="margin-bottom: 10px">
       <div class="row">
         <div class="col-md-5">
-          <%= f.text_field :learning, label: false, class: "form-control", placeholder: "Enter Learning Outcome"%></div>
+          <%= f.text_field :learning, label: false, class: "form-control", placeholder: "Enter Learning Outcome / ระบุการเรียนรู้"%></div>
         <div class="col-md-5">
           <%= f.select :outcome, [['Remember', 'Remember'],
                               ['Understand', 'Understand'],
                               ['Apply', 'Apply'],
                               ['Analyze', 'Analyze'],
                               ['Evaluate', 'Evaluate'],
-                              ['Create', 'Create']], {prompt: "Select Bloom's Taxonomy"}, {class: "form-control"} %>
+                              ['Create', 'Create']], {prompt: "Select Bloom's Taxonomy / เลือกประเภท"}, {class: "form-control"} %>
         </div>
         <div class="col-md-2"><%= link_to_remove_association '<i class="fa fa-trash-o fa-2x text-danger"></i>'.html_safe, f %></div>
 

@@ -2,7 +2,7 @@
   <div class="field", style="margin-bottom: 10px">
     <div class="row", style="margin-bottom: 10px">
 
-        <%= f.label :chapter_name %>
+      <%= f.label :chapter_name ,class: "text-success"%><span class="text-success"> / ชื่อบทเรียน</span>
         <div class="col-sm-11"><%= f.select( :name, @course.chapters.all.map {|u| [u.name,u.name]},{prompt: "Select Chapter"}, {class: "form-control"}) %></div>
 
 

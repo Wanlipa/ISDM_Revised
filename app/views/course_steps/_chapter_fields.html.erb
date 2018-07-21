@@ -2,11 +2,11 @@
   <div class="field", style="margin-bottom: 10px">
     <div class="row", style="margin-bottom: 10px">
       <div class="col-sm-9">
-        <%= f.label :chapter_name ,class: "text-success"%>
-        <%= f.text_field :name, label: false, class: "form-control", placeholder: "Enter chapter name" %>
+        <%= f.label :chapter_name ,class: "text-success"%><span class="text-success"> / ชื่อบทเรียน</span>
+        <%= f.text_field :name, label: false, class: "form-control", placeholder: "Enter chapter name / ระบุชื่อบทเรียน" %>
       </div>
       <div class="col-sm-2">
-        <%= f.label :time %>
+        <%= f.label :time %> / เวลา
         <%= f.number_field :time,
                            :min => 0,
                            :max => @course.length, label: false, :onkeydown => "myFunction()",

@@ -27,7 +27,7 @@
         <h3 class="faq-links">Course metadata <i class="fa fa-angle-up" class="btn btn-link " data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></i></h3>
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="card-body">
-            more detail...
+            รายละเอียดหลักสูตร ได้แก่ ความยาวหลักสูตร, ชั่วโมงต่อสัปดาห์, ราคา, สถาบัน, ระดับ, ภาษา, คำบรรยาย, วิชาที่ต้องรู้มาก่อน
           </div>
         </div>
       </div>
@@ -35,12 +35,12 @@
       <div class="card-body">
         <%= form_for @course, url: wizard_path do |f| %>
         <div class="form-group">
-          <%= f.label "length (minutes)" %><br>
+          <%= f.label "length (minutes)" %> / ความยาวหลักสูตร<br>
           <%= f.number_field :length, min: 1, max: 1000, step: 1 %>
         </div>
 
         <div class="form-group">
-          <%= f.label :effort %><br>
+          <%= f.label :effort %> / ชั่วโมงต่อสัปดาห์<br>
           <%= f.select :effort, [['1 to 2 hours per week','1 to 2 hours per week'],
                                  ['3 to 4 hours per week','3 to 4 hours per week'],
                                  ['5 to 6 hours per week','5 to 6 hours per week'],
@@ -53,48 +53,48 @@
                                  ['19 to 20 hours per week','19 to 20 hours per week'],
                                  ['21 to 22 hours per week','21 to 22 hours per week'],
                                  ['23 to 24 hours per week','23 to 24 hours per week'],
-                                 ['25 to 26 hours per week','25 to 26 hours per week']], {prompt: "Select effort"}, {class: "form-control"} %>
+                                 ['25 to 26 hours per week','25 to 26 hours per week']], {prompt: "Select effort / เลือกชั่วโมงต่อสัปดาห์"}, {class: "form-control"} %>
         </div>
 
         <div class="form-group">
-          <%= f.label :price %>&nbsp<span style="color: #999999;">(ex. FREE, Add a Verified Certificate for $49 USD)</span><br>
-          <%= f.text_field :price, class: "form-control", placeholder: "Enter price" %>
+          <%= f.label :price %> / ราคา&nbsp<span style="color: #999999;"> (ex. FREE, Add a Verified Certificate for $49 USD)</span><br>
+          <%= f.text_field :price, class: "form-control", placeholder: "Enter price / ระบุราคา" %>
         </div>
 
         <div class="form-group">
-          <%= f.label :institution %>&nbsp<span style="color: #999999;">(ex. Microsoft, UC San DiegoX, UC BerkeleyX)</span><br>
-          <%= f.text_field :institution, class: "form-control", placeholder: "Enter institution" %>
+          <%= f.label :institution %> / สถาบัน&nbsp<span style="color: #999999;">(ex. Microsoft, UC San DiegoX, UC BerkeleyX)</span><br>
+          <%= f.text_field :institution, class: "form-control", placeholder: "Enter institution / ระบุสถาบัน" %>
         </div>
 
         <div class="form-group">
-          <%= f.label :level %><br>
+          <%= f.label :level %> / ระดับ<br>
           <%= f.select :level, [['Introductory','Introductory'],
                                   ['Intermediate','Intermediate'],
-                                  ['Advanced','Advanced']], {prompt: "Select level"}, {class: "form-control"} %>
+                                  ['Advanced','Advanced']], {prompt: "Select level / เลือกระดับ"}, {class: "form-control"} %>
         </div>
 
         <div class="form-group">
-          <%= f.label :languages %><br>
+          <%= f.label :languages %> / ภาษา<br>
           <%= f.select :languages, [['Chinese','Chinese'],
                                     ['English','English'],
                                     ['Japanese','Japanese'],
-                                    ['Thai','Thai'],], {prompt: "Select language"}, {class: "form-control"} %>
+                                    ['Thai','Thai'],], {prompt: "Select language / เลือกภาษา"}, {class: "form-control"} %>
         </div>
 
         <div class="form-group">
-          <%= f.label :video_transcript %><br>
+          <%= f.label :video_transcript %> / คำบรรยาย<br>
           <%= f.select :videots, [['Chinese','Chinese'],
                                     ['English','English'],
                                     ['Japanese','Japanese'],
-                                    ['Thai','Thai'],], {prompt: "Select video transcript"}, {class: "form-control"} %>
+                                    ['Thai','Thai'],], {prompt: "Select video transcript / เลือกคำบรรยาย"}, {class: "form-control"} %>
         </div>
 
         <div class="form-group">
-          <%= f.label :prerequisites %>&nbsp<span style="color: #999999;">(ex. None, Familiarity with marketing and basic operations in Microsoft Excel preferred.)</span><br>
-          <%= f.text_area :prerequisites, class: "form-control", placeholder: "Enter prerequisites" %>
+          <%= f.label :prerequisites %> / พื้นฐานวิชาที่ต้องรู้มาก่อน&nbsp<span style="color: #999999;"> (ex. None, Familiarity with marketing and basic operations in Microsoft Excel preferred.)</span><br>
+          <%= f.text_area :prerequisites, class: "form-control", placeholder: "Enter prerequisites / ระบุพื้นฐานวิชา" %>
         </div>
 
-        <%= f.label :target_learner %>
+        <%= f.label :target_learner %> / ผู้เรียนเป้าหมาย
         <div class="card">
           <div class="card-body">
             <div class="targets">

@@ -1,8 +1,8 @@
 <div class="nested-fields">
   <div class="form-group", style="margin-bottom: 10px">
     <div class="row">
-      <div class="col-md-4"><%= f.text_field :name, label: false, class: "form-control", placeholder: "Enter instructor name"%></div>
-      <div class="col-md-4"><%= f.text_field :profile, label: false, class: "form-control", placeholder: "Enter instructor profile" %></div>
+      <div class="col-md-4"><%= f.text_field :name, label: false, class: "form-control", placeholder: "Enter instructor name / ชื่อผู้สอน"%></div>
+      <div class="col-md-4"><%= f.text_field :profile, label: false, class: "form-control", placeholder: "Enter instructor profile / ประวัติผู้สอน" %></div>
       <div class="col-md-3">
         <div style="margin-bottom: 10px">
           <%= image_tag(f.object.avatar.url, size: "150x150") if f.object.avatar? %>
