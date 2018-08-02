@@ -36,15 +36,15 @@
       <%= form_for @course, url: wizard_path do |f| %>
         <div class="form-group">
           <%= f.label :evaluation %><br>
-          <%= f.select :evaluation, [['No exam','No exam'],
-                                 ['Matching','Matching'],
-                                 ['True/False','True/False'],
-                                 ['Multiple choices','Multiple choices'],
-                                 ['Equation/Calculation','Equation/Calculation'],
-                                 ['Short answer','Short answer'],
-                                 ['Long essay/Paragraph essay','Long essay/Paragraph essay'],
-                                 ['Essay and case study','Essay and case study'],
-                                 ['Drawing/Sketch','Drawing/Sketch']], {prompt: "Select evaluation / เลือกการประเมิน"}, {class: "form-control"} %>
+          <%= f.select :evaluation, [['No exam / ไม่มีการสอบ','No exam'],
+                                 ['Matching / การจับคู่ ','Matching'],
+                                 ['True/False / เลือกถูกผิด','True/False'],
+                                 ['Multiple choices / ข้อสอบหลายตัวเลือก','Multiple choices'],
+                                 ['Equation/Calculation / ข้อสอบคิดคำนวน','Equation/Calculation'],
+                                 ['Short answer / ตอบแบบสั้น','Short answer'],
+                                 ['Long essay/Paragraph essay / ตอบบรรยายความ','Long essay/Paragraph essay'],
+                                 ['Essay and case study / กรณีศึกษา','Essay and case study'],
+                                 ['Drawing/Sketch / ร่างหรือออกแบบ','Drawing/Sketch']], {prompt: "Select evaluation / เลือกการประเมิน"}, {class: "form-control"} %>
         </div>
 
         <div class="form-group">
